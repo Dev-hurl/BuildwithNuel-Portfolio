@@ -29,7 +29,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     final textTheme = Theme.of(context).textTheme;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -135,7 +135,7 @@ class _ProjectFeatureCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         //color: AppColors.surface,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(16),
         //border: Border.all(color: AppColors.border),
       ),
       clipBehavior: Clip.antiAlias,

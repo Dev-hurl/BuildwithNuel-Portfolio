@@ -64,7 +64,7 @@ class _NarrowLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -136,7 +136,7 @@ class _AboutContent extends StatelessWidget {
         SizedBox(height: 24),
         ...workExperience.map(
           (exp) => Padding(
-            padding: const EdgeInsets.only(bottom: 24),
+            padding: EdgeInsets.only(bottom: 24),
             child: _ExperienceItem(experience: exp, textTheme: textTheme),
           ),
         ),
