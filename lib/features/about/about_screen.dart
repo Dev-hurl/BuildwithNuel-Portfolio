@@ -80,15 +80,24 @@ class _NarrowLayout extends StatelessWidget {
 class _AvatarBlock extends StatelessWidget {
   const _AvatarBlock();
 
+  static const _avatarPath = 'assets/images/avatar.jpg';
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 56,
       backgroundColor: AppColors.surfaceVariant,
-      child: HugeIcon(
-        icon: HugeIcons.strokeRoundedUserCircle,
-        size: 48,
-        color: AppColors.textSecondary,
+      child: ClipOval(
+        child: Image.asset(
+          _avatarPath,
+          width: 112,
+          height: 112,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) => HugeIcon(
+            icon: HugeIcons.strokeRoundedUserCircle,
+            size: 48,
+            color: AppColors.textSecondary,
+          ),
+        ),
       ),
     );
   }
@@ -117,7 +126,8 @@ class _AboutContent extends StatelessWidget {
             ),
             _SocialIcon(
               icon: HugeIcons.strokeRoundedLinkedin01,
-              onTap: () => _launchUrl('https://www.linkedin.com/in/buildwithnuel'),
+              onTap: () =>
+                  _launchUrl('https://www.linkedin.com/in/buildwithnuel'),
             ),
             _SocialIcon(
               icon: HugeIcons.strokeRoundedNewTwitterRectangle,

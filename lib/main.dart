@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Adekanmbi Emmanuel',
+      title: 'Buildwithnuel - Flutter Developer & UX/UI Designer',
       debugShowCheckedModeBanner: false,
       theme: _buildTheme(),
       routerConfig: appRouter,

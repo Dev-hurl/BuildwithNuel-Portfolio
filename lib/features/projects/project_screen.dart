@@ -158,7 +158,7 @@ class _ProjectFeatureCard extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: ClipRRect(
-        borderRadius:  BorderRadiusGeometry.circular(24),
+        borderRadius: BorderRadiusGeometry.circular(24),
         child: SizedBox(
           width: double.infinity,
           //color: AppColors.surfaceVariant,
@@ -206,13 +206,19 @@ class _ProjectFeatureCard extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () => context.go('/projects/${project.slug}'),
-              child: Text('View case study'),
+              child: Text(
+                'View case study',
+                style: TextStyle(fontFamily: AppFonts.body),
+              ),
             ),
             if (project.demoUrl != null) ...[
               SizedBox(width: 12),
               TextButton(
-                onPressed: () {}, 
-                child: Text('Live demo'),
+                onPressed: () {},
+                child: Text(
+                  'Live demo',
+                  style: TextStyle(fontFamily: AppFonts.body),
+                ),
               ),
             ],
           ],
@@ -222,7 +228,7 @@ class _ProjectFeatureCard extends StatelessWidget {
   }
 }
 
-class _TechBadge extends StatelessWidget {
+/*class _TechBadge extends StatelessWidget {
   final String label;
 
   const _TechBadge({required this.label});
@@ -246,4 +252,4 @@ class _TechBadge extends StatelessWidget {
       ),
     );
   }
-}
+}*/
