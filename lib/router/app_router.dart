@@ -1,3 +1,4 @@
+import 'package:buildwithnuel/core/constants/app_colors.dart';
 import 'package:buildwithnuel/features/projects/project_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -54,7 +55,7 @@ final GoRouter appRouter = GoRouter(
           path: '/',
           builder: (context, state) => Title(
             title: 'Buildwithnuel - Flutter Developer & UX/UI Designer',
-            color: Colors.transparent,
+            color: AppColors.background,
             child: HomeScreen(),
           ),
         ),
@@ -62,7 +63,7 @@ final GoRouter appRouter = GoRouter(
           path: '/about',
           builder: (context, state) => Title(
             title: 'About - Buildwithnuel',
-            color: Colors.transparent,
+            color: AppColors.background,
             child: AboutScreen(),
           ),
         ),
@@ -70,7 +71,7 @@ final GoRouter appRouter = GoRouter(
           path: '/projects',
           builder: (context, state) => Title(
             title: 'Projects - Buildwithnuel',
-            color: Colors.transparent,
+            color: AppColors.background,
             child: ProjectsScreen(),
           ),
           routes: [
@@ -80,7 +81,7 @@ final GoRouter appRouter = GoRouter(
                 final slug = state.pathParameters['slug']!;
                 return Title(
                   title: '$slug - Buildwithnuel',
-                  color: Colors.transparent,
+                  color: AppColors.background,
                   child: ProjectDetailScreen(slug: slug),
                 );
               },
@@ -91,7 +92,7 @@ final GoRouter appRouter = GoRouter(
           path: '/contact',
           builder: (context, state) => Title(
             title: 'Contact - Buildwithnuel',
-            color: Colors.transparent,
+            color: AppColors.background,
             child: ContactScreen(),
           ),
         ),
