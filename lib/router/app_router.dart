@@ -50,22 +50,51 @@ final GoRouter appRouter = GoRouter(
         );
       },
       routes: [
-        GoRoute(path: '/', builder: (context, state) => HomeScreen()),
-        GoRoute(path: '/about', builder: (context, state) => AboutScreen()),
+        GoRoute(
+          path: '/',
+          builder: (context, state) => Title(
+            title: 'Buildwithnuel - Flutter Developer & UX/UI Designer',
+            color: Colors.transparent,
+            child: HomeScreen(),
+          ),
+        ),
+        GoRoute(
+          path: '/about',
+          builder: (context, state) => Title(
+            title: 'About - Buildwithnuel',
+            color: Colors.transparent,
+            child: AboutScreen(),
+          ),
+        ),
         GoRoute(
           path: '/projects',
-          builder: (context, state) => ProjectsScreen(),
+          builder: (context, state) => Title(
+            title: 'Projects - Buildwithnuel',
+            color: Colors.transparent,
+            child: ProjectsScreen(),
+          ),
           routes: [
             GoRoute(
               path: ':slug',
               builder: (context, state) {
                 final slug = state.pathParameters['slug']!;
-                return ProjectDetailScreen(slug: slug);
+                return Title(
+                  title: '$slug - Buildwithnuel',
+                  color: Colors.transparent,
+                  child: ProjectDetailScreen(slug: slug),
+                );
               },
             ),
           ],
         ),
-        GoRoute(path: '/contact', builder: (context, state) => ContactScreen()),
+        GoRoute(
+          path: '/contact',
+          builder: (context, state) => Title(
+            title: 'Contact - Buildwithnuel',
+            color: Colors.transparent,
+            child: ContactScreen(),
+          ),
+        ),
       ],
     ),
   ],

@@ -34,7 +34,6 @@ class _ContactScreenState extends State<ContactScreen> {
   String? _statusMessage;
   bool _statusIsError = false;
 
-  // TODO: replace with your real Formspree endpoint after signup
   static const String _formEndpoint = 'https://formspree.io/f/xdaqnneq';
 
   static const List<String> _services = [
