@@ -122,19 +122,23 @@ class _AboutContent extends StatelessWidget {
           children: [
             _SocialIcon(
               icon: HugeIcons.strokeRoundedGithub01,
+              placeholder: 'GitHub',
               onTap: () => _launchUrl('https://github.com/Dev-hurl'),
             ),
             _SocialIcon(
               icon: HugeIcons.strokeRoundedLinkedin01,
+              placeholder: 'LinkedIn',
               onTap: () =>
                   _launchUrl('https://www.linkedin.com/in/buildwithnuel'),
             ),
             _SocialIcon(
               icon: HugeIcons.strokeRoundedNewTwitterRectangle,
+              placeholder: 'X(Twitter)',
               onTap: () => _launchUrl('https://x.com/BuildwithNuel'),
             ),
             _SocialIcon(
               icon: HugeIcons.strokeRoundedMail01,
+              placeholder: 'Email',
               onTap: () => _launchUrl('mailto:devhurl7@gmail.com'),
             ),
           ],
@@ -166,9 +170,14 @@ class _AboutContent extends StatelessWidget {
 
 class _SocialIcon extends StatelessWidget {
   final dynamic icon;
+  final String placeholder;
   final VoidCallback onTap;
 
-  const _SocialIcon({required this.icon, required this.onTap});
+  const _SocialIcon({
+    required this.icon,
+    required this.placeholder,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -176,13 +185,22 @@ class _SocialIcon extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(20),
       child: Container(
+        //alignment: Alignment.center,
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: AppColors.surface,
-          shape: BoxShape.circle,
+          shape: BoxShape.rectangle,
           border: Border.all(color: AppColors.border),
+          borderRadius: BorderRadius.circular(16),
         ),
-        child: HugeIcon(icon: icon, size: 18, color: AppColors.white),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 8,
+          children: [
+            HugeIcon(icon: icon, size: 18, color: AppColors.white),
+            Text(placeholder, style: Theme.of(context).textTheme.labelSmall),
+          ],
+        ),
       ),
     );
   }
