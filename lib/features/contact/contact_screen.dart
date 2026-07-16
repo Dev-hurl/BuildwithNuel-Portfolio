@@ -11,10 +11,42 @@ Future<void> _launchUrl(String url) async {
   }
 }
 
+class _MessageTemplate {
+  final String label;
+  final IconData icon;
+  final String text;
+  const _MessageTemplate({
+    required this.label,
+    required this.icon,
+    required this.text,
+  });
+}
+
+const List<_MessageTemplate> _templates = [
+  _MessageTemplate(
+    label: 'Mobile App',
+    icon: Icons.phone_iphone_outlined,
+    text:
+        "Hi! I'm interested in developing a mobile app. To give you some context: [brief description of idea]. My budget range for this project is [budget], and I am aiming to launch by [timeline].",
+  ),
+  _MessageTemplate(
+    label: 'Website',
+    icon: Icons.language_outlined,
+    text:
+        "Hi! I'm interested in building a website. Here's some context: [brief description of idea]. My budget range for this project is [budget], and I am aiming to launch by [timeline].",
+  ),
+  _MessageTemplate(
+    label: 'Custom Project',
+    icon: Icons.lightbulb_outline,
+    text:
+        "Hi! I have a project in mind that doesn't fit a standard category: [brief description of idea]. My budget range is [budget], and my ideal timeline is [timeline].",
+  ),
+];
+
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
 
-  static const double _wideBreakpoint = 800; // same cutoff as About page
+  static const double _wideBreakpoint = 800;
 
   @override
   State<ContactScreen> createState() => _ContactScreenState();
@@ -45,12 +77,21 @@ class _ContactScreenState extends State<ContactScreen> {
   ];
 
   // Generic tiers, no currency committed yet — swap for real ranges later
-  static const List<String> _budgets = [
-    'Small',
-    'Medium',
-    'Large',
-    'Not sure yet',
+  static final List<String> _budgets = [
+    '<\$1k',
+    '\$1k - \$2k',
+    '\$2k - \$5k',
+    '> \$5k',
   ];
+
+  bool _templateApplied = false;
+
+  void _applyTemplate(_MessageTemplate template) {
+    setState(() {
+      _messageController.text = template.text;
+      _templateApplied = true;
+    });
+  }
 
   @override
   void dispose() {
@@ -112,6 +153,7 @@ class _ContactScreenState extends State<ContactScreen> {
           _statusIsError = false;
           _selectedService = null;
           _selectedBudget = null;
+          _templateApplied = false;
         });
         _formKey.currentState!.reset();
         _nameController.clear();
@@ -222,14 +264,14 @@ class _ContactScreenState extends State<ContactScreen> {
               validator: _validateService,
               onChanged: (value) => setState(() => _selectedService = value),
             ),
-            /*SizedBox(height: 16),
+            SizedBox(height: 16),
             _LabeledDropdown(
               label: 'Budget',
               value: _selectedBudget,
               hint: 'Select budget...',
               items: _budgets,
               onChanged: (value) => setState(() => _selectedBudget = value),
-            ),*/
+            ),
             SizedBox(height: 16),
             _LabeledField(
               label: 'Message',
@@ -240,6 +282,76 @@ class _ContactScreenState extends State<ContactScreen> {
               maxLines: 5,
             ),
             SizedBox(height: 24),
+            const SizedBox(height: 16),
+            Text(
+              'QUICK START WITH A TEMPLATE',
+              style: TextStyle(
+                fontFamily: AppFonts.body,
+                fontSize: 11,
+                letterSpacing: 0.5,
+                color: AppColors.textSecondary,
+              ),
+            ),
+            SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: _templates
+                  .map(
+                    (t) => OutlinedButton.icon(
+                      onPressed: () => _applyTemplate(t),
+                      icon: Icon(t.icon, size: 16),
+                      label: Text(t.label),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.textSecondary,
+                        backgroundColor: AppColors.surfaceVariant,
+                        side: BorderSide(color: AppColors.border),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+            SizedBox(height: 24,),
+            if (_templateApplied) ...[
+              SizedBox(height: 12),
+              Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.amber.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Colors.amber.withValues(alpha: 0.4),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit_outlined,
+                      size: 16,
+                      color: Colors.amber,
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Please customize the template with your specific details before sending.',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            SizedBox(height: 16),
             if (_statusMessage != null) ...[
               Text(
                 _statusMessage!,

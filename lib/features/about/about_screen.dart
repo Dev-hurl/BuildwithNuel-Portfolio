@@ -39,7 +39,7 @@ class _WideLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+      padding: EdgeInsets.symmetric(horizontal: 48, vertical: 32),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
