@@ -277,12 +277,10 @@ class _ContactScreenState extends State<ContactScreen> {
               label: 'Message',
               controller: _messageController,
               hint: 'Your Message',
-
               validator: _validateMessage,
               maxLines: 5,
             ),
-            SizedBox(height: 24),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'QUICK START WITH A TEMPLATE',
               style: TextStyle(
@@ -351,7 +349,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 ),
               ),
             ],
-            SizedBox(height: 16),
+            SizedBox(height: 12),
             if (_statusMessage != null) ...[
               Text(
                 _statusMessage!,
