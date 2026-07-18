@@ -1,3 +1,4 @@
+import 'package:buildwithnuel/core/widgets/engineering_stack.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class HomeScreen extends StatelessWidget {
                   _buildFeaturedProjects(context, textTheme, isWide),
                   const SizedBox(height: 80),
                   _buildSkillsStrip(textTheme),
+                  EngineeringStackSection(),
                 ],
               ),
             ),
@@ -279,12 +281,12 @@ class _FeaturedCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(project.title, style: textTheme.titleLarge),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
                   Text(
                     project.tagline,
                     style: textTheme.bodyMedium,
