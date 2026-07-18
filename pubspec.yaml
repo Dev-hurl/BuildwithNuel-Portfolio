@@ -38,8 +38,10 @@ dependencies:
   hugeicons: ^1.1.7
   url_launcher: ^6.3.2
   http: ^1.6.0
+  marquee: ^2.3.0
   flutter_web_plugins:
     sdk: flutter
+  flutter_svg: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/skills/
     - assets/fonts/
   
   fonts:
