@@ -29,7 +29,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     final textTheme = Theme.of(context).textTheme;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+      padding: EdgeInsets.symmetric(horizontal: 48, vertical: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -59,7 +59,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
             (project) => Padding(
               padding: EdgeInsets.only(bottom: 24),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 8),
                 child: _ProjectFeatureCard(project: project),
               ),
             ),

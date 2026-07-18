@@ -39,7 +39,7 @@ class _WideLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 48, vertical: 32),
+      padding: EdgeInsets.symmetric(horizontal: 60, vertical: 32),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -110,72 +110,73 @@ class _AboutContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Emmanuel Oluwaseyi Adekanmbi ', style: textTheme.headlineMedium),
-        SizedBox(height: 4),
-        Text('Flutter Developer', style: textTheme.titleMedium),
-        SizedBox(height: 16),
-        Row(
-          spacing: 12,
-          children: [
-            _SocialIcon(
-              icon: HugeIcons.strokeRoundedGithub01,
-              placeholder: 'GitHub',
-              onTap: () => _launchUrl('https://github.com/Dev-hurl'),
-            ),
-            _SocialIcon(
-              icon: HugeIcons.strokeRoundedLinkedin01,
-              placeholder: 'LinkedIn',
-              onTap: () =>
-                  _launchUrl('https://www.linkedin.com/in/buildwithnuel'),
-            ),
-            _SocialIcon(
-              icon: HugeIcons.strokeRoundedNewTwitterRectangle,
-              placeholder: 'X(Twitter)',
-              onTap: () => _launchUrl('https://x.com/BuildwithNuel'),
-            ),
-            _SocialIcon(
-              icon: HugeIcons.strokeRoundedMail01,
-              placeholder: 'Email',
-              onTap: () => _launchUrl('mailto:devhurl7@gmail.com'),
-            ),
-          ],
-        ),
-        SizedBox(height: 32),
-        Text(aboutBio, style: textTheme.bodyMedium),
-        SizedBox(height: 48),
-        Text('Work Experience', style: textTheme.headlineMedium),
-        SizedBox(height: 24),
-        ...workExperience.map(
-          (exp) => Padding(
-            padding: EdgeInsets.only(bottom: 24),
-            child: _ExperienceItem(experience: exp, textTheme: textTheme),
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Emmanuel Oluwaseyi Adekanmbi ', style: textTheme.headlineMedium),
+          SizedBox(height: 4),
+          Text('Flutter Developer', style: textTheme.titleMedium),
+          SizedBox(height: 16),
+          Row(
+            spacing: 12,
+            children: [
+              _SocialIcon(
+                icon: HugeIcons.strokeRoundedGithub01,
+                
+                onTap: () => _launchUrl('https://github.com/Dev-hurl'),
+              ),
+              _SocialIcon(
+                icon: HugeIcons.strokeRoundedLinkedin01,
+                
+                onTap: () =>
+                    _launchUrl('https://www.linkedin.com/in/buildwithnuel'),
+              ),
+              _SocialIcon(
+                icon: HugeIcons.strokeRoundedNewTwitterRectangle,
+                
+                onTap: () => _launchUrl('https://x.com/BuildwithNuel'),
+              ),
+              _SocialIcon(
+                icon: HugeIcons.strokeRoundedMail01,
+                
+                onTap: () => _launchUrl('mailto:devhurl7@gmail.com'),
+              ),
+            ],
           ),
-        ),
-        SizedBox(height: 24),
-        Text('Technical Skills', style: textTheme.headlineMedium),
-        SizedBox(height: 24),
-        ...technicalSkills.map(
-          (skill) => Padding(
-            padding: EdgeInsets.only(bottom: 20),
-            child: _SkillItem(skill: skill, textTheme: textTheme),
+          SizedBox(height: 32),
+          Text(aboutBio, style: textTheme.bodyMedium),
+          SizedBox(height: 48),
+          Text('Work Experience', style: textTheme.headlineMedium),
+          SizedBox(height: 24),
+          ...workExperience.map(
+            (exp) => Padding(
+              padding: EdgeInsets.only(bottom: 24),
+              child: _ExperienceItem(experience: exp, textTheme: textTheme),
+            ),
           ),
-        ),
-      ],
+          SizedBox(height: 24),
+          Text('Technical Skills', style: textTheme.headlineMedium),
+          SizedBox(height: 24),
+          ...technicalSkills.map(
+            (skill) => Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: _SkillItem(skill: skill, textTheme: textTheme),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 
 class _SocialIcon extends StatelessWidget {
   final dynamic icon;
-  final String placeholder;
   final VoidCallback onTap;
 
   const _SocialIcon({
     required this.icon,
-    required this.placeholder,
     required this.onTap,
   });
 
@@ -185,20 +186,17 @@ class _SocialIcon extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        //alignment: Alignment.center,
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: AppColors.surface,
-          shape: BoxShape.rectangle,
+          shape: BoxShape.circle,
           border: Border.all(color: AppColors.border),
-          borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           spacing: 8,
           children: [
             HugeIcon(icon: icon, size: 18, color: AppColors.white),
-            Text(placeholder, style: Theme.of(context).textTheme.labelSmall),
           ],
         ),
       ),
@@ -224,9 +222,9 @@ class _ExperienceItem extends StatelessWidget {
             Text(experience.period, style: textTheme.labelSmall),
           ],
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         Text(experience.role, style: textTheme.titleMedium),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         ...experience.highlights.map(
           (point) => Padding(
             padding: const EdgeInsets.only(bottom: 6),

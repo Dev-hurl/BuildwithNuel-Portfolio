@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
         final isWide = constraints.maxWidth > _wideBreakpoint;
 
         return SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 64),
+          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 64),
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1100),
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(20),
@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.circle, size: 8, color: AppColors.accent),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 'Available for freelance work',
                 style: TextStyle(
@@ -66,12 +66,12 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: 24),
         Text.rich(
           TextSpan(
             style: textTheme.headlineMedium,
             children: [
-              const TextSpan(text: 'Building Flutter apps '),
+              TextSpan(text: 'Building Flutter apps '),
               TextSpan(
                 text: 'that feel right.',
                 style: TextStyle(color: AppColors.textSecondary),
@@ -80,9 +80,9 @@ class HomeScreen extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 480),
+          constraints: BoxConstraints(maxWidth: 480),
           child: Text(
             'Flutter developer & UX/UI designer building apps across fintech, SaaS, and productivity.',
             textAlign: TextAlign.center,
@@ -98,7 +98,7 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: () => context.go('/projects'),
               icon: Icon(Icons.arrow_forward, size: 18),
-              label: const Text('View Projects'),
+              label: Text('View Projects'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.textPrimary,
@@ -113,12 +113,12 @@ class HomeScreen extends StatelessWidget {
             ),
             OutlinedButton.icon(
               onPressed: () => context.go('/contact'),
-              icon: const Icon(Icons.mail_outline, size: 18),
-              label: const Text('Get in Touch'),
+              icon: Icon(Icons.mail_outline, size: 18),
+              label: Text('Get in Touch'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
                 side: BorderSide(color: AppColors.border),
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: 24,
                   vertical: 14,
                 ),
@@ -149,11 +149,11 @@ class HomeScreen extends StatelessWidget {
             Text('Featured Projects', style: textTheme.titleLarge),
             TextButton(
               onPressed: () => context.go('/projects'),
-              child: const Text('View all →'),
+              child: Text('View all →'),
             ),
           ],
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: 20),
         isWide
             ? Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                     .map(
                       (p) => Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
                           child: _FeaturedCard(project: p),
                         ),
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:hugeicons/hugeicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_fonts.dart';
@@ -13,7 +14,7 @@ Future<void> _launchUrl(String url) async {
 
 class _MessageTemplate {
   final String label;
-  final IconData icon;
+  final dynamic icon;
   final String text;
   const _MessageTemplate({
     required this.label,
@@ -22,22 +23,22 @@ class _MessageTemplate {
   });
 }
 
-const List<_MessageTemplate> _templates = [
+final List<_MessageTemplate> _templates = [
   _MessageTemplate(
     label: 'Mobile App',
-    icon: Icons.phone_iphone_outlined,
+    icon: HugeIcons.strokeRoundedSmartPhone01,
     text:
         "Hi! I'm interested in developing a mobile app. To give you some context: [brief description of idea]. My budget range for this project is [budget], and I am aiming to launch by [timeline].",
   ),
   _MessageTemplate(
     label: 'Website',
-    icon: Icons.language_outlined,
+    icon: HugeIcons.strokeRoundedGlobe,
     text:
         "Hi! I'm interested in building a website. Here's some context: [brief description of idea]. My budget range for this project is [budget], and I am aiming to launch by [timeline].",
   ),
   _MessageTemplate(
     label: 'Custom Project',
-    icon: Icons.lightbulb_outline,
+    icon: HugeIcons.strokeRoundedAiIdea,
     text:
         "Hi! I have a project in mind that doesn't fit a standard category: [brief description of idea]. My budget range is [budget], and my ideal timeline is [timeline].",
   ),
@@ -188,7 +189,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
   Widget _buildWide(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(48),
+      padding: EdgeInsets.all(80),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -298,7 +299,11 @@ class _ContactScreenState extends State<ContactScreen> {
                   .map(
                     (t) => OutlinedButton.icon(
                       onPressed: () => _applyTemplate(t),
-                      icon: Icon(t.icon, size: 16),
+                      icon: HugeIcon(
+                        icon: t.icon,
+                        size: 16,
+                        color: AppColors.textSecondary,
+                      ), // was Icon(t.icon, size: 16)
                       label: Text(t.label),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.textSecondary,
@@ -316,7 +321,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   )
                   .toList(),
             ),
-            SizedBox(height: 24,),
+            SizedBox(height: 24),
             if (_templateApplied) ...[
               SizedBox(height: 12),
               Container(
@@ -330,11 +335,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 ),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.edit_outlined,
-                      size: 16,
-                      color: Colors.amber,
-                    ),
+                    Icon(Icons.edit_outlined, size: 16, color: Colors.amber),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
