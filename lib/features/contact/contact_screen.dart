@@ -203,7 +203,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
   Widget _buildNarrow(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(24),
+      padding: EdgeInsets.all(32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

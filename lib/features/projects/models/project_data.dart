@@ -9,7 +9,7 @@ final List<ProjectModel> projects = [
     description:
         'TODO: 2-3 sentences on the problem OrbiTask solves for its user.',
     role: 'Solo Developer & UX/UI Designer',
-    techStack: ['Flutter', 'Dart', 'Provider', 'Firebase (planned)', 'Figma'],
+    techStack: ['Flutter', 'Provider', 'Firebase', 'Figma'],
     screenshotUrls: [
       'assets/images/orbitask.jpg',
       'assets/images/orbitask screenshot.jpg',
@@ -46,7 +46,7 @@ final List<ProjectModel> projects = [
     tagline: 'TODO',
     description: 'TODO',
     role: 'Solo Developer',
-    techStack: ['Flutter', 'Dart'],
+    techStack: ['Flutter',],
     screenshotUrls: [],
     challenge: 'TODO',
     solution: 'TODO',

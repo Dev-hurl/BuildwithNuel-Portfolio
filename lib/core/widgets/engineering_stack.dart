@@ -1,4 +1,6 @@
 // engineering_stack_section.dart
+import 'package:buildwithnuel/core/constants/app_colors.dart';
+import 'package:buildwithnuel/core/constants/app_fonts.dart';
 import 'package:buildwithnuel/core/models/skill_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -42,8 +44,8 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFF0D0D0D),
-      padding: EdgeInsets.symmetric(vertical: 80, horizontal: 40),
+      color: AppColors.background,
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -55,9 +57,9 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
               Text(
                 'ENGINEERING STACK',
                 style: TextStyle(
-                  color: Colors.green,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
+                  color: AppColors.success,
+                  fontSize: AppFonts.smallSize,
+                  fontWeight: AppFonts.captionWeight,
                   letterSpacing: 2,
                 ),
               ),
@@ -70,7 +72,7 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
           Text(
             'Built with the',
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.textPrimary,
               fontSize: 48,
               fontWeight: FontWeight.w800,
             ),
@@ -88,28 +90,32 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
 
           Text(
             'Mobile apps, beautiful UIs, and scalable backends.',
-            style: TextStyle(color: Colors.white54, fontSize: 14),
+            style: TextStyle(
+              color: Colors.white54,
+              fontSize: AppFonts.captionSize,
+              fontWeight: AppFonts.captionWeight,
+            ),
           ),
 
-          const SizedBox(height: 48),
+          SizedBox(height: 48),
 
           // divider + label
           Row(
             children: [
-              const Text(
+              Text(
                 'LANGUAGES & FRAMEWORKS',
                 style: TextStyle(
-                  color: Colors.white38,
-                  fontSize: 11,
-                  letterSpacing: 1.5,
+                  color: AppColors.textSecondary,
+                  fontSize: AppFonts.smallSize,
+                  letterSpacing: 2,
                 ),
               ),
-              const SizedBox(width: 16),
-              const Expanded(child: Divider(color: Colors.white12)),
+              SizedBox(width: 16),
+              Expanded(child: Divider(color: Colors.white12)),
             ],
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // scrolling skills row
           SizedBox(
@@ -117,7 +123,7 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
             child: ListView.separated(
               controller: _scrollController,
               scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               itemCount: skills.length * 3, // repeat for seamless loop
               separatorBuilder: (_, _) => const SizedBox(width: 32),
               itemBuilder: (context, index) {
@@ -127,21 +133,20 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
                   children: [
                     SvgPicture.asset(
                       skill.iconPath,
-                      width: 24,
-                      height: 24,
-                      colorFilter: const ColorFilter.mode(
-                        Colors.white70,
+                      width: 20,
+                      height: 20,
+                      colorFilter: ColorFilter.mode(
+                        AppColors.accent,
                         BlendMode.srcIn,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 4),
                     Text(
                       skill.name,
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 1,
+                      style: TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: AppFonts.smallSize,
+                        fontWeight: AppFonts.captionWeight,
                       ),
                     ),
                   ],

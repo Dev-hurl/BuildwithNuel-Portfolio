@@ -10,6 +10,7 @@ class AppColors {
 
   static const Color primary = Color(0xFF6C5CE7);   // violet accent
   static const Color accent = Color(0xFF00D9FF);    // cyan highlight
+  static const Color success = Color(0xFF00E676);
 
   static const Color textPrimary = Color(0xFFE6E6E6);
   static const Color textSecondary = Color(0xFF9AA5B1);

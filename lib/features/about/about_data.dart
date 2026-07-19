@@ -29,6 +29,9 @@ const List<WorkExperience> workExperience = [
     role: 'Flutter Developer',
     highlights: [
       'TODO: what you actually did on this',
+      'TODO: what you actually did on this',
+      'TODO: what you actually did on this',
+      'TODO: what you actually did on this',
     ],
   ),
   WorkExperience(
@@ -36,6 +39,20 @@ const List<WorkExperience> workExperience = [
     period: '2024 - Present',
     role: 'UX/UI Designer',
     highlights: [
+      'TODO: what you actually did on this what you actually did on this',
+      'TODO: what you actually did on this',
+      'TODO: what you actually did on this',
+      'TODO: what you actually did on this',
+    ],
+  ),
+  WorkExperience(
+    company: 'Freelance',
+    period: '2024 - Present',
+    role: 'UX/UI Designer',
+    highlights: [
+      'TODO: what you actually did on this',
+      'TODO: what you actually did on this',
+      'TODO: what you actually did on this',
       'TODO: what you actually did on this',
     ],
   ),
