@@ -3,6 +3,7 @@ import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_fonts.dart';
 import '../about/about_data.dart';
@@ -14,35 +15,27 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final width = constraints.maxWidth;
-
-        return SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 64),
-          child: Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 1100),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _buildHero(context, textTheme),
-                  SizedBox(height: 80),
-                  //EngineeringStackSection(),
-                  //SizedBox(height: 80),
-                  _buildWhoIAmCard(context, textTheme),
-                  SizedBox(height: 80),
-                  _buildWorkExperienceSection(context, textTheme, width),
-                  SizedBox(height: 80),
-                  _buildProjectsSection(context, textTheme, width),
-                  SizedBox(height: 80),
-                  //_buildSkillsStrip(textTheme),
-                ],
-              ),
-            ),
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: 48, vertical: 32),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 1100),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildHero(context, textTheme),
+              SizedBox(height: 80),
+              _buildWhoIAmCard(context, textTheme),
+              SizedBox(height: 80),
+              EngineeringStackSection(),
+              _WorkExperienceSection(),
+              SizedBox(height: 80),
+              _ProjectsSection(),
+              SizedBox(height: 80),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
@@ -50,7 +43,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(20),
@@ -60,7 +53,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.circle, size: 8, color: AppColors.success),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 'Available for freelance work',
                 style: TextStyle(
@@ -72,12 +65,12 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         Text.rich(
           TextSpan(
             style: textTheme.headlineMedium,
             children: [
-              TextSpan(text: 'Building Flutter apps '),
+              const TextSpan(text: 'Building Flutter apps '),
               TextSpan(
                 text: 'that feel right.',
                 style: TextStyle(color: AppColors.textSecondary),
@@ -86,16 +79,16 @@ class HomeScreen extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 480),
+          constraints: const BoxConstraints(maxWidth: 480),
           child: Text(
             'Flutter developer & UX/UI designer building apps across fintech, SaaS, and productivity.',
             textAlign: TextAlign.center,
             style: textTheme.bodyMedium,
           ),
         ),
-        SizedBox(height: 32),
+        const SizedBox(height: 32),
         Wrap(
           alignment: WrapAlignment.center,
           spacing: 16,
@@ -103,7 +96,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             ElevatedButton.icon(
               onPressed: () => context.go('/projects'),
-              icon: Icon(Icons.arrow_forward, size: 18),
+              icon: const Icon(Icons.arrow_forward, size: 18),
               label: Text(
                 'View Projects',
                 style: textTheme.labelLarge?.copyWith(
@@ -114,7 +107,10 @@ class HomeScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.textPrimary,
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 14,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
@@ -122,12 +118,15 @@ class HomeScreen extends StatelessWidget {
             ),
             OutlinedButton.icon(
               onPressed: () => context.go('/contact'),
-              icon: Icon(Icons.mail_outline, size: 18),
-              label: Text('Get in Touch'),
+              icon: const Icon(Icons.mail_outline, size: 18),
+              label: const Text('Get in Touch'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
                 side: BorderSide(color: AppColors.border),
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 14,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
@@ -139,180 +138,122 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildWorkExperienceSection(
-  BuildContext context,
-  TextTheme textTheme,
-  double width,
-) {
-  final isWide = width > 800;
-  final columns = isWide ? 2 : 1;
-  const spacing = 16.0;
-  const containerPadding = 48.0;
-  final availableWidth = width - containerPadding;
-  final cardWidth = (availableWidth - spacing * (columns - 1)) / columns;
-
-  final rows = <List<WorkExperience>>[];
-  for (var i = 0; i < workExperience.length; i += columns) {
-    rows.add(workExperience.skip(i).take(columns).toList());
-  }
-
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      _SectionHeader(eyebrow: 'EXPERIENCE', title: "Where I've ", highlight: 'shipped'),
-      const SizedBox(height: 24),
-      _BracketSection(
-        child: Column(
-          children: rows.map((rowItems) {
-            return Padding(
-              padding: EdgeInsets.only(bottom: rowItems == rows.last ? 0 : spacing),
-              child: IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    for (var i = 0; i < rowItems.length; i++) ...[
-                      SizedBox(width: cardWidth, child: _WorkExperienceCard(experience: rowItems[i])),
-                      if (i != rowItems.length - 1) SizedBox(width: spacing),
-                    ],
-                  ],
+  Widget _buildWhoIAmCard(BuildContext context, TextTheme textTheme) {
+    return _GlowBentoCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'WHO I AM',
+            style: TextStyle(
+              fontFamily: AppFonts.body,
+              fontSize: 11,
+              letterSpacing: 1,
+              fontWeight: FontWeight.w600,
+              color: AppColors.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text.rich(
+            TextSpan(
+              style: textTheme.headlineMedium,
+              children: [
+                const TextSpan(text: 'Full Stack\n'),
+                TextSpan(
+                  text: 'Engineer\n',
+                  style: TextStyle(color: AppColors.success),
                 ),
-              ),
-            );
-          }).toList(),
-        ),
+                const TextSpan(text: 'Motion UI\n'),
+                const TextSpan(text: 'Premium\n'),
+                TextSpan(
+                  text: 'Design',
+                  style: TextStyle(color: AppColors.success),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            "Turning code into experiences you feel, remember, and can't stop coming back to.",
+            style: textTheme.bodyMedium,
+          ),
+        ],
       ),
-    ],
-  );
-}
-
-  Widget _buildProjectsSection(
-    BuildContext context,
-    TextTheme textTheme,
-    double width,
-  ) {
-    final columns =
-        width <
-            500 //TODO: Adjust breakpoint to fit if the screen sizes becomes smaller or bigger
-        ? 1
-        : (width < 800 ? 2 : (width < 1100 ? 3 : 4));
-    const spacing = 16.0;
-    final cardWidth = (width - spacing * (columns - 1)) / columns;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _SectionHeader(
-          eyebrow: 'PROJECTS',
-          title: "Things I've ",
-          highlight: 'built',
-        ),
-        SizedBox(height: 24),
-        Wrap(
-          spacing: spacing,
-          runSpacing: spacing,
-          children: projects
-              .map(
-                (p) => SizedBox(
-                  width: cardWidth,
-                  child: _ProjectGridCard(project: p),
-                ),
-              )
-              .toList(),
-        ),
-      ],
     );
   }
 }
 
-Widget _buildWhoIAmCard(BuildContext context, TextTheme textTheme) {
-  return _GlowBentoCard(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'WHO I AM',
-          style: TextStyle(
-            fontFamily: AppFonts.body,
-            fontSize: 11,
-            letterSpacing: 1,
-            fontWeight: FontWeight.w600,
-            color: AppColors.textSecondary,
-          ),
-        ),
-        SizedBox(height: 16),
-        Text.rich(
-          TextSpan(
-            style: textTheme.headlineMedium,
-            children: [
-              TextSpan(text: 'Full Stack\n'),
-              TextSpan(
-                text: 'Engineer\n',
-                style: TextStyle(color: AppColors.success),
-              ),
-              TextSpan(text: 'Motion UI\n'),
-              TextSpan(text: 'Premium\n'),
-              TextSpan(
-                text: 'Design',
-                style: TextStyle(color: AppColors.success),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: 20),
-        Text(
-          "Turning code into experiences you feel, remember, and can't stop coming back to.",
-          style: textTheme.bodyMedium,
-        ),
-      ],
-    ),
-  );
-}
+// ── EXPERIENCE SECTION ──────────────────────────────────────
 
-class _SectionHeader extends StatelessWidget {
-  final String eyebrow;
-  final String title;
-  final String highlight;
-
-  const _SectionHeader({
-    required this.eyebrow,
-    required this.title,
-    required this.highlight,
-  });
+class _WorkExperienceSection extends StatelessWidget {
+  const _WorkExperienceSection();
+  static const double _wideBreakpoint = 800;
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth > _wideBreakpoint;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const _SectionHeader(
+              eyebrow: 'EXPERIENCE',
+              title: "Where I've ",
+              highlight: 'shipped',
+            ),
+            const SizedBox(height: 24),
+            if (isWide) _buildGrid(constraints.maxWidth) else _buildStack(),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildGrid(double maxWidth) {
+    const spacing = 16.0;
+    const columns = 2;
+    final cardWidth = (maxWidth - spacing * (columns - 1)) / columns;
+
+    final rows = <List<WorkExperience>>[];
+    for (var i = 0; i < workExperience.length; i += columns) {
+      rows.add(workExperience.skip(i).take(columns).toList());
+    }
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Container(width: 20, height: 2, color: AppColors.success),
-            SizedBox(width: 8),
-            Text(
-              eyebrow,
-              style: textTheme.labelMedium?.copyWith(
-                color: AppColors.success,
-                fontFamily: AppFonts.heading,
-              ),
+      children: rows.map((rowItems) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: rowItems == rows.last ? 0 : spacing),
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (var i = 0; i < rowItems.length; i++) ...[
+                  SizedBox(
+                    width: cardWidth,
+                    child: _WorkExperienceCard(experience: rowItems[i]),
+                  ),
+                  if (i != rowItems.length - 1) const SizedBox(width: spacing),
+                ],
+              ],
             ),
-          ],
-        ),
-        SizedBox(height: 12),
-        Text.rich(
-          TextSpan(
-            style: textTheme.headlineMedium,
-            children: [
-              TextSpan(text: title),
-              TextSpan(
-                text: highlight,
-                style: TextStyle(color: AppColors.success),
-              ),
-            ],
           ),
-        ),
-      ],
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildStack() {
+    return Column(
+      children: workExperience
+          .map(
+            (exp) => Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: _WorkExperienceCard(experience: exp),
+            ),
+          )
+          .toList(),
     );
   }
 }
@@ -330,14 +271,14 @@ class _WorkExperienceCard extends StatelessWidget {
         : trimmed.substring(0, trimmed.length >= 2 ? 2 : 1).toUpperCase();
 
     return Container(
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: AppColors.border),
       ),
       child: Column(
-        //crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -376,34 +317,92 @@ class _WorkExperienceCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Divider(color: AppColors.border, height: 6),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ...experience.highlights.map(
             (point) => Padding(
-              padding: EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: 8),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 6),
+                    padding: const EdgeInsets.only(top: 6),
                     child: Icon(
                       Icons.circle,
                       size: 4,
                       color: AppColors.success,
                     ),
                   ),
-                  SizedBox(width: 8),
-                  Expanded(
-                    // was: Column(children: [Text(point, ...)])
-                    child: Text(point, style: textTheme.labelMedium),
-                  ),
+                  const SizedBox(width: 8),
+                  Expanded(child: Text(point, style: textTheme.labelMedium)),
                 ],
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+// ── PROJECTS SECTION ────────────────────────────────────────
+
+class _ProjectsSection extends StatelessWidget {
+  const _ProjectsSection();
+  static const double _wideBreakpoint = 800;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth > _wideBreakpoint;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const _SectionHeader(
+              eyebrow: 'PROJECTS',
+              title: "Things I've ",
+              highlight: 'built',
+            ),
+            const SizedBox(height: 24),
+            if (isWide) _buildGrid(constraints.maxWidth) else _buildStack(),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildGrid(double maxWidth) {
+    const spacing = 16.0;
+    const columns = 3;
+    final cardWidth = (maxWidth - spacing * (columns - 1)) / columns;
+
+    return Wrap(
+      spacing: spacing,
+      runSpacing: spacing,
+      children: projects
+          .map(
+            (p) => SizedBox(
+              width: cardWidth,
+              child: _ProjectGridCard(project: p),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _buildStack() {
+    return Column(
+      children: projects
+          .map(
+            (p) => Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: _ProjectGridCard(project: p),
+            ),
+          )
+          .toList(),
     );
   }
 }
@@ -432,14 +431,27 @@ class _ProjectGridCard extends StatelessWidget {
             AspectRatio(
               aspectRatio: 16 / 9,
               child: Container(
+                width: double.infinity,
                 color: AppColors.surfaceVariant,
-                child: Center(
-                  child: Icon(
-                    Icons.crop_square_outlined,
-                    size: 28,
-                    color: AppColors.success.withValues(alpha: 0.5),
-                  ),
-                ),
+                child: project.screenshotUrls.isNotEmpty
+                    ? Image.asset(
+                        project.screenshotUrls.first,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Center(
+                          child: Icon(
+                            Icons.broken_image_outlined,
+                            size: 28,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      )
+                    : Center(
+                        child: HugeIcon(
+                          icon: HugeIcons.strokeRoundedImage02,
+                          size: 28,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
               ),
             ),
             Padding(
@@ -451,31 +463,42 @@ class _ProjectGridCard extends StatelessWidget {
                     project.techStack.isNotEmpty
                         ? project.techStack.join(' · ').toUpperCase()
                         : 'PROJECT',
-                    style: textTheme.labelSmall?.copyWith(
+                    style: textTheme.labelMedium?.copyWith(
                       color: AppColors.textSecondary,
                       letterSpacing: 1,
                     ),
                   ),
                   SizedBox(height: 16),
-                  Text(project.title, style: textTheme.titleMedium),
+                  Text(
+                    project.title,
+                    style: textTheme.titleMedium?.copyWith(
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
                   SizedBox(height: 8),
                   Text(
                     project.tagline,
-                    style: textTheme.bodySmall,
+                    style: textTheme.labelMedium,
                     maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
+                    //overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 16),
                   Row(
                     children: [
                       if (project.repoUrl != null) ...[
-                        Icon(
-                          Icons.code,
+                        HugeIcon(
+                          icon: HugeIcons.strokeRoundedGithub,
                           size: 14,
-                          color: AppColors.textSecondary,
+                          color: AppColors.success,
+                          strokeWidth: 2,
                         ),
                         SizedBox(width: 4),
-                        Text('Source', style: textTheme.labelLarge),
+                        Text(
+                          'SOURCE',
+                          style: textTheme.labelMedium?.copyWith(
+                            fontWeight: AppFonts.subheadingWeight,
+                          ),
+                        ),
                         SizedBox(width: 16),
                       ],
                       if (project.demoUrl != null) ...[
@@ -486,9 +509,10 @@ class _ProjectGridCard extends StatelessWidget {
                         ),
                         SizedBox(width: 4),
                         Text(
-                          'Live',
-                          style: textTheme.labelLarge?.copyWith(
+                          'LIVE',
+                          style: textTheme.labelMedium?.copyWith(
                             color: AppColors.success,
+                            fontWeight: AppFonts.subheadingWeight,
                           ),
                         ),
                       ],
@@ -504,10 +528,60 @@ class _ProjectGridCard extends StatelessWidget {
   }
 }
 
+// ── SHARED WIDGETS ──────────────────────────────────────────
+
+class _SectionHeader extends StatelessWidget {
+  final String eyebrow;
+  final String title;
+  final String highlight;
+
+  const _SectionHeader({
+    required this.eyebrow,
+    required this.title,
+    required this.highlight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(width: 20, height: 2, color: AppColors.success),
+            const SizedBox(width: 8),
+            Text(
+              eyebrow,
+              style: textTheme.labelMedium?.copyWith(
+                color: AppColors.success,
+                fontFamily: AppFonts.heading,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Text.rich(
+          TextSpan(
+            style: textTheme.headlineMedium,
+            children: [
+              TextSpan(text: title),
+              TextSpan(
+                text: highlight,
+                style: TextStyle(color: AppColors.success),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _GlowBentoCard extends StatefulWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
-
   const _GlowBentoCard({
     required this.child,
     this.padding = const EdgeInsets.all(16),
@@ -553,67 +627,9 @@ class _GlowBentoCardState extends State<_GlowBentoCard>
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.success.withValues(alpha: 0.15)),
         ),
-        child: Stack(clipBehavior: Clip.none, children: [child!]),
+        child: child,
       ),
       child: widget.child,
     );
-  }
-}
-
-class _BracketSection extends StatelessWidget {
-  final Widget child;
-  const _BracketSection({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          padding: EdgeInsets.all(24),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
-          child: child,
-        ),
-        ..._corners(),
-      ],
-    );
-  }
-
-  List<Widget> _corners() {
-    const len = 16.0, thick = 1.0;
-    Widget corner(bool top, bool left) => Positioned(
-      top: top ? -1 : null,
-      bottom: !top ? -1 : null,
-      left: left ? -1 : null,
-      right: !left ? -1 : null,
-      child: SizedBox(
-        width: len,
-        height: len,
-        child: Stack(
-          children: [
-            Positioned(
-              top: top ? 0 : null,
-              bottom: !top ? 0 : null,
-              left: 0,
-              right: 0,
-              child: Container(height: thick, color: AppColors.success),
-            ),
-            Positioned(
-              left: left ? 0 : null,
-              right: !left ? 0 : null,
-              top: 0,
-              bottom: 0,
-              child: Container(width: thick, color: AppColors.success),
-            ),
-          ],
-        ),
-      ),
-    );
-    return [
-      corner(true, true),
-      corner(true, false),
-      corner(false, true),
-      corner(false, false),
-    ];
   }
 }

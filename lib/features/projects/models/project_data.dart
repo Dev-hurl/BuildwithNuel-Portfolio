@@ -3,13 +3,13 @@ import 'project_model.dart';
 final List<ProjectModel> projects = [
   ProjectModel(
     slug: 'orbitask',
-    title: 'OrbiTask : Task Management App',
+    title: 'OrbiTask',
     tagline:
         'A task management app, built as both a learning project and a portfolio piece.',
     description:
         'TODO: 2-3 sentences on the problem OrbiTask solves for its user.',
     role: 'Solo Developer & UX/UI Designer',
-    techStack: ['Flutter', 'Provider', 'Firebase', 'Figma'],
+    techStack: ['Flutter', 'Provider', 'Firebase',],
     screenshotUrls: [
       'assets/images/orbitask.jpg',
       'assets/images/orbitask screenshot.jpg',
@@ -28,7 +28,7 @@ final List<ProjectModel> projects = [
     description:
         'SwiftMart is a modern e-commerce app designed to make online shopping seamless, especially for first-time users. The project emphasizes ease of use, fast onboarding, and a smooth guest checkout experience. ',
     role: 'Developer & UX/UI Designer',
-    techStack: ['Flutter', 'Figma', 'Chatgpt'],
+    techStack: ['Flutter', 'Chatgpt'],
     screenshotUrls: [
       'assets/images/swiftmart.jpg',
       'assets/images/swiftmart screenshot.jpg',
@@ -50,7 +50,7 @@ final List<ProjectModel> projects = [
     screenshotUrls: [],
     challenge: 'TODO',
     solution: 'TODO',
-    repoUrl: null,
-    demoUrl: null,
+    repoUrl: '',
+    demoUrl: '',
   ),
 ];
