@@ -47,7 +47,7 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
 
     return Container(
       color: AppColors.background,
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -66,23 +66,19 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
             ],
           ),
 
-          SizedBox(height: 24),
+          SizedBox(height: 16),
 
           // heading
-          Text(
-            'Built with the',
-            style: TextStyle(
-              color: AppColors.textPrimary,
-              fontSize: 48,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          Text(
-            'right tools',
-            style: TextStyle(
-              color: Colors.green,
-              fontSize: 48,
-              fontWeight: FontWeight.w800,
+          Text.rich(
+            TextSpan(
+              style: textTheme.headlineMedium,
+              children: [
+                TextSpan(text: 'Built with the'),
+                TextSpan(
+                  text: '\nright tools',
+                  style: TextStyle(color: AppColors.success),
+                ),
+              ],
             ),
           ),
 
@@ -104,7 +100,7 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
                   ?..copyWith(fontFamily: AppFonts.heading),
               ),
               SizedBox(width: 16),
-              Expanded(child: Divider(color: Colors.white12)),
+              Expanded(child: Divider(color: AppColors.textSecondary)),
             ],
           ),
 
@@ -129,18 +125,14 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
                       width: 20,
                       height: 20,
                       colorFilter: ColorFilter.mode(
-                        AppColors.accent,
+                        AppColors.success.withValues(alpha: 0.65),
                         BlendMode.srcIn,
                       ),
                     ),
                     SizedBox(width: 4),
                     Text(
                       skill.name,
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: AppFonts.bodySize,
-                        fontWeight: AppFonts.captionWeight,
-                      ),
+                      style: textTheme.labelMedium,
                     ),
                   ],
                 );

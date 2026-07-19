@@ -19,7 +19,7 @@ final List<ProjectModel> projects = [
     solution:
         'OrbiTask is designed to help students, professionals, and business owners overcome the challenges of  poor time and task management. The app provides a structured approach by integrating smart  reminders, personalized scheduling, and progress tracking to enhance productivity. Through features  that prioritize tasks, reduce procrastination, and promote consistency, OrbiTask ensures users can  efficiently manage their workload and achieve their goals.',
     repoUrl: 'https://github.com/Dev-hurl/OrbiTask',
-    demoUrl: 'https://github.com/Dev-hurl/OrbiTask',
+    demoUrl: '',
   ),
   ProjectModel(
     slug: 'swift-mart',

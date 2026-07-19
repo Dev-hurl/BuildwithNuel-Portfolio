@@ -1,3 +1,4 @@
+import 'package:buildwithnuel/core/utils/launch_url.dart';
 import 'package:buildwithnuel/core/widgets/engineering_stack.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
@@ -455,7 +456,7 @@ class _ProjectGridCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -468,49 +469,70 @@ class _ProjectGridCard extends StatelessWidget {
                       letterSpacing: 1,
                     ),
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 8),
                   Text(
                     project.title,
-                    style: textTheme.bodyMedium,
+                    style: textTheme.labelLarge?.copyWith(
+                      fontFamily: AppFonts.heading,
+                      color: AppColors.textPrimary,
+                    ),
                   ),
                   SizedBox(height: 8),
+                  Divider(color: AppColors.border, height: 1),
+                  SizedBox(height: 16),
                   Text(
                     project.tagline,
                     style: textTheme.labelMedium,
                     maxLines: 3,
                     //overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 24),
                   Row(
                     children: [
                       if (project.repoUrl != null) ...[
-                        HugeIcon(
-                          icon: HugeIcons.strokeRoundedGithub,
-                          size: 14,
-                          color: AppColors.success,
-                          strokeWidth: 2,
-                        ),
-                        SizedBox(width: 4),
-                        Text(
-                          'SOURCE',
-                          style: textTheme.labelMedium?.copyWith(
-                            fontWeight: AppFonts.subheadingWeight,
+                        InkWell(
+                          onTap: () => launchExternalUrl(project.repoUrl!),
+                          child: Row(
+                            children: [
+                              HugeIcon(
+                                icon: HugeIcons.strokeRoundedGithub,
+                                size: 14,
+                                color: AppColors.success,
+                                strokeWidth: 2,
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                'SOURCE',
+                                style: textTheme.labelMedium?.copyWith(
+                                  fontWeight: AppFonts.subheadingWeight,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(width: 16),
                       ],
                       if (project.demoUrl != null) ...[
-                        Icon(
-                          Icons.arrow_outward,
-                          size: 14,
-                          color: AppColors.success,
-                        ),
-                        SizedBox(width: 4),
-                        Text(
-                          'LIVE',
-                          style: textTheme.labelMedium?.copyWith(
-                            color: AppColors.success,
-                            fontWeight: AppFonts.subheadingWeight,
+                        InkWell(
+                          onTap: () => context.go(
+                            '/projects/${project.slug}?section=demo',
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.arrow_outward,
+                                size: 14,
+                                color: AppColors.success,
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                'LIVE',
+                                style: textTheme.labelMedium?.copyWith(
+                                  color: AppColors.success,
+                                  fontWeight: AppFonts.subheadingWeight,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
