@@ -43,6 +43,8 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       color: AppColors.background,
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -56,11 +58,9 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
               SizedBox(width: 8),
               Text(
                 'ENGINEERING STACK',
-                style: TextStyle(
+                style: textTheme.labelMedium?.copyWith(
                   color: AppColors.success,
-                  fontSize: AppFonts.smallSize,
-                  fontWeight: AppFonts.captionWeight,
-                  letterSpacing: 2,
+                  fontFamily: AppFonts.heading,
                 ),
               ),
             ],
@@ -90,11 +90,7 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
 
           Text(
             'Mobile apps, beautiful UIs, and scalable backends.',
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: AppFonts.captionSize,
-              fontWeight: AppFonts.captionWeight,
-            ),
+            style: textTheme.labelMedium,
           ),
 
           SizedBox(height: 48),
@@ -104,11 +100,8 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
             children: [
               Text(
                 'LANGUAGES & FRAMEWORKS',
-                style: TextStyle(
-                  color: AppColors.textSecondary,
-                  fontSize: AppFonts.smallSize,
-                  letterSpacing: 2,
-                ),
+                style: textTheme.labelMedium
+                  ?..copyWith(fontFamily: AppFonts.heading),
               ),
               SizedBox(width: 16),
               Expanded(child: Divider(color: Colors.white12)),
@@ -145,7 +138,7 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
                       skill.name,
                       style: TextStyle(
                         color: AppColors.textSecondary,
-                        fontSize: AppFonts.smallSize,
+                        fontSize: AppFonts.bodySize,
                         fontWeight: AppFonts.captionWeight,
                       ),
                     ),

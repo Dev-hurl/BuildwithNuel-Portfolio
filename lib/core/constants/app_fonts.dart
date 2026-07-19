@@ -12,7 +12,7 @@ class AppFonts {
   static const FontWeight bodyWeight = FontWeight.w400;
   static const FontWeight captionWeight = FontWeight.normal;
 
-  static const double headingSize = 48;
+  static const double headingSize = 32;
   static const double titleSize = 28;
   static const double subheadingSize = 20;
   static const double bodySize = 16;

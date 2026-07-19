@@ -216,6 +216,8 @@ class _ContactScreenState extends State<ContactScreen> {
   }
 
   Widget _buildFormCard(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -301,7 +303,7 @@ class _ContactScreenState extends State<ContactScreen> {
                       onPressed: () => _applyTemplate(t),
                       icon: HugeIcon(
                         icon: t.icon,
-                        size: 16,
+                        size: 14,
                         color: AppColors.textSecondary,
                       ), // was Icon(t.icon, size: 16)
                       label: Text(t.label),
@@ -309,7 +311,7 @@ class _ContactScreenState extends State<ContactScreen> {
                         foregroundColor: AppColors.textSecondary,
                         backgroundColor: AppColors.surfaceVariant,
                         side: BorderSide(color: AppColors.border),
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 14,
                           vertical: 10,
                         ),
@@ -321,9 +323,9 @@ class _ContactScreenState extends State<ContactScreen> {
                   )
                   .toList(),
             ),
-            SizedBox(height: 24),
+            SizedBox(height: 8),
             if (_templateApplied) ...[
-              SizedBox(height: 12),
+              SizedBox(height: 8),
               Container(
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -340,9 +342,9 @@ class _ContactScreenState extends State<ContactScreen> {
                     Expanded(
                       child: Text(
                         'Please customize the template with your specific details before sending.',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.textSecondary,
+                        style: textTheme.labelMedium?.copyWith(
+                          color: AppColors.textPrimary,
+                          
                         ),
                       ),
                     ),
@@ -382,10 +384,9 @@ class _ContactScreenState extends State<ContactScreen> {
                       )
                     : Text(
                         'Send message',
-                        style: TextStyle(
-                          fontSize: AppFonts.bodySize,
+                        style: textTheme.labelLarge?.copyWith(
                           color: AppColors.textPrimary,
-                          fontWeight: AppFonts.bodyWeight,
+                          fontWeight: AppFonts.subheadingWeight,
                         ),
                       ),
               ),
@@ -414,7 +415,9 @@ class _ContactIntro extends StatelessWidget {
               TextSpan(text: "Let's Collaborate "),
               TextSpan(
                 text: 'and Begin the work',
-                style: TextStyle(color: AppColors.textSecondary),
+                style: textTheme.headlineMedium?.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),
@@ -451,10 +454,9 @@ class _ContactIntro extends StatelessWidget {
                   ),
                   child: Text(
                     "Let's Book A Call",
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: AppFonts.bodySize,
-                      fontWeight: AppFonts.bodyWeight,
+                    style: textTheme.labelLarge?.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: AppFonts.subheadingWeight,
                     ),
                   ),
                 ),

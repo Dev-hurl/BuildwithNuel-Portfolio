@@ -69,18 +69,16 @@ flutter:
     - assets/fonts/
   
   fonts:
-    - family: Space Grotesk
+    - family: Science Gothic
       fonts:
         - asset: assets/fonts/ScienceGothic-Regular.ttf
         - asset: assets/fonts/ScienceGothic-SemiBold.ttf
           weight: 600
         - asset: assets/fonts/ScienceGothic-Bold.ttf
           weight: 700
-    - family: Inter
+    - family: Urbanist
       fonts:
         - asset: assets/fonts/Urbanist-Regular.ttf
-        - asset: assets/fonts/Urbanist-Medium.ttf
-          weight: 400 
 
   #
   # For details regarding fonts from package dependencies,

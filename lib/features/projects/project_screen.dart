@@ -37,7 +37,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
           SizedBox(height: 16),
           Text(
             'A collection of Flutter apps across fintech, SaaS, and productivity.',
-            style: textTheme.bodyMedium,
+            style: textTheme.labelLarge,
           ),
           SizedBox(height: 40),
           Wrap(

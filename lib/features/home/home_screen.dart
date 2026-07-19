@@ -3,15 +3,12 @@ import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hugeicons/hugeicons.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_fonts.dart';
 import '../about/about_data.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  static const double _wideBreakpoint = 800;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +17,6 @@ class HomeScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final isWide = width > _wideBreakpoint;
 
         return SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 64),
@@ -32,8 +28,8 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   _buildHero(context, textTheme),
                   SizedBox(height: 80),
-                  EngineeringStackSection(),
-                  SizedBox(height: 80),
+                  //EngineeringStackSection(),
+                  //SizedBox(height: 80),
                   _buildWhoIAmCard(context, textTheme),
                   SizedBox(height: 80),
                   _buildWorkExperienceSection(context, textTheme, width),
@@ -108,7 +104,13 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: () => context.go('/projects'),
               icon: Icon(Icons.arrow_forward, size: 18),
-              label: Text('View Projects'),
+              label: Text(
+                'View Projects',
+                style: textTheme.labelLarge?.copyWith(
+                  color: AppColors.textPrimary,
+                  fontWeight: AppFonts.subheadingWeight,
+                ),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.textPrimary,
@@ -138,43 +140,50 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildWorkExperienceSection(
-    BuildContext context,
-    TextTheme textTheme,
-    double width,
-  ) {
-    final columns = width < 500 ? 1 : (width < 900 ? 2 : 3);
-    const spacing = 16.0;
-    final cardWidth =
-        (width - spacing * (columns - 1) - 48) /
-        columns; // -48 accounts for new container padding
+  BuildContext context,
+  TextTheme textTheme,
+  double width,
+) {
+  final isWide = width > 800;
+  final columns = isWide ? 2 : 1;
+  const spacing = 16.0;
+  const containerPadding = 48.0;
+  final availableWidth = width - containerPadding;
+  final cardWidth = (availableWidth - spacing * (columns - 1)) / columns;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _SectionHeader(
-          eyebrow: 'EXPERIENCE',
-          title: "Where I've ",
-          highlight: 'shipped',
-        ),
-        const SizedBox(height: 24),
-        _BracketSection(
-          // new wrapper
-          child: Wrap(
-            spacing: spacing,
-            runSpacing: spacing,
-            children: workExperience
-                .map(
-                  (exp) => SizedBox(
-                    width: cardWidth,
-                    child: _WorkExperienceCard(experience: exp),
-                  ),
-                )
-                .toList(),
-          ),
-        ),
-      ],
-    );
+  final rows = <List<WorkExperience>>[];
+  for (var i = 0; i < workExperience.length; i += columns) {
+    rows.add(workExperience.skip(i).take(columns).toList());
   }
+
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _SectionHeader(eyebrow: 'EXPERIENCE', title: "Where I've ", highlight: 'shipped'),
+      const SizedBox(height: 24),
+      _BracketSection(
+        child: Column(
+          children: rows.map((rowItems) {
+            return Padding(
+              padding: EdgeInsets.only(bottom: rowItems == rows.last ? 0 : spacing),
+              child: IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (var i = 0; i < rowItems.length; i++) ...[
+                      SizedBox(width: cardWidth, child: _WorkExperienceCard(experience: rowItems[i])),
+                      if (i != rowItems.length - 1) SizedBox(width: spacing),
+                    ],
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    ],
+  );
+}
 
   Widget _buildProjectsSection(
     BuildContext context,
@@ -254,7 +263,6 @@ Widget _buildWhoIAmCard(BuildContext context, TextTheme textTheme) {
           "Turning code into experiences you feel, remember, and can't stop coming back to.",
           style: textTheme.bodyMedium,
         ),
-        
       ],
     ),
   );
@@ -274,6 +282,7 @@ class _SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -283,12 +292,9 @@ class _SectionHeader extends StatelessWidget {
             SizedBox(width: 8),
             Text(
               eyebrow,
-              style: TextStyle(
-                fontFamily: AppFonts.body,
-                fontSize: AppFonts.smallSize,
-                letterSpacing: 1,
-                fontWeight: FontWeight.w600,
+              style: textTheme.labelMedium?.copyWith(
                 color: AppColors.success,
+                fontFamily: AppFonts.heading,
               ),
             ),
           ],
@@ -324,16 +330,17 @@ class _WorkExperienceCard extends StatelessWidget {
         : trimmed.substring(0, trimmed.length >= 2 ? 2 : 1).toUpperCase();
 
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: AppColors.border),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: 32,
@@ -341,7 +348,9 @@ class _WorkExperienceCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.success.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: AppColors.success.withValues(alpha: 0.25)),
+                  border: Border.all(
+                    color: AppColors.success.withValues(alpha: 0.25),
+                  ),
                 ),
                 child: Center(
                   child: Text(
@@ -354,22 +363,25 @@ class _WorkExperienceCard extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(experience.company, style: textTheme.labelLarge),
-                  Text(experience.role, style: textTheme.labelMedium),
-                  SizedBox(height: 8),
-                  Text(experience.period, style: textTheme.labelSmall),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(experience.company, style: textTheme.bodyMedium),
+                    Text(experience.role, style: textTheme.labelMedium),
+                    SizedBox(height: 6),
+                    Text(experience.period, style: textTheme.labelMedium),
+                  ],
+                ),
               ),
             ],
           ),
-          Divider(color: AppColors.border, height: 8),
+          SizedBox(height: 16),
+          Divider(color: AppColors.border, height: 6),
           SizedBox(height: 16),
           ...experience.highlights.map(
             (point) => Padding(
-              padding: const EdgeInsets.only(bottom: 6),
+              padding: EdgeInsets.only(bottom: 8),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -377,12 +389,15 @@ class _WorkExperienceCard extends StatelessWidget {
                     padding: EdgeInsets.only(top: 6),
                     child: Icon(
                       Icons.circle,
-                      size: 2.5,
+                      size: 4,
                       color: AppColors.success,
                     ),
                   ),
                   SizedBox(width: 8),
-                  Column(children: [Text(point, style: textTheme.labelSmall)]),
+                  Expanded(
+                    // was: Column(children: [Text(point, ...)])
+                    child: Text(point, style: textTheme.labelMedium),
+                  ),
                 ],
               ),
             ),

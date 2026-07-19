@@ -60,23 +60,18 @@ class MyApp extends StatelessWidget {
           color: AppColors.textPrimary,
         ),
         labelLarge: TextStyle(
-          fontFamily: AppFonts.heading,
-          fontWeight: AppFonts.headingWeight,
+          fontFamily: AppFonts.body,
+          fontWeight: AppFonts.bodyWeight,
           fontSize: AppFonts.bodySize,
           color: AppColors.textSecondary,
         ),
         labelMedium: TextStyle(
           fontFamily: AppFonts.body,
-          fontWeight: AppFonts.captionWeight,
-          fontSize: AppFonts.smallSize,
+          fontWeight: AppFonts.bodyWeight,
+          fontSize: AppFonts.captionSize,
           color: AppColors.textSecondary,
         ),
-        labelSmall: TextStyle(
-          fontFamily: AppFonts.heading,
-          fontWeight: FontWeight.normal,
-          fontSize: AppFonts.smallSize,
-          color: AppColors.textSecondary,
-        ),
+        
       ),
     );
   }
