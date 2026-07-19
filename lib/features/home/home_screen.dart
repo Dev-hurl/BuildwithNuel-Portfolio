@@ -471,9 +471,7 @@ class _ProjectGridCard extends StatelessWidget {
                   SizedBox(height: 16),
                   Text(
                     project.title,
-                    style: textTheme.titleMedium?.copyWith(
-                      color: AppColors.textPrimary,
-                    ),
+                    style: textTheme.bodyMedium,
                   ),
                   SizedBox(height: 8),
                   Text(
