@@ -1,5 +1,6 @@
 import 'package:buildwithnuel/core/constants/app_colors.dart';
 import 'package:buildwithnuel/core/widgets/live_app_embed.dart';
+import 'package:buildwithnuel/core/widgets/live_demo_modal.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,10 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
           const SizedBox(height: 24),
           Text(project.description, style: textTheme.bodyMedium),
           const SizedBox(height: 24),
-          Text('Tech stack: ${project.techStack.join(', ')}', style: textTheme.labelSmall),
+          Text(
+            'Tech stack: ${project.techStack.join(', ')}',
+            style: textTheme.labelSmall,
+          ),
           const SizedBox(height: 24),
           Text('Challenge', style: textTheme.titleLarge),
           const SizedBox(height: 16),
@@ -77,7 +81,12 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                 children: [
                   Text('Live Demo', style: textTheme.titleLarge),
                   const SizedBox(height: 16),
-                  DeviceFrameEmbed(appUrl: project.demoUrl!),
+                  ElevatedButton(
+                    onPressed: () {
+                      LiveDemoModal.show(context, appUrl: project.demoUrl!, title: project.title);//TODO: Adjust Device preview
+                    },
+                    child: Text('Preview', style: textTheme.labelMedium),
+                  ),
                 ],
               ),
             ),
@@ -102,11 +111,19 @@ Widget _buildImage(ProjectModel project) {
                 project.screenshotUrls.first,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) => Center(
-                  child: Icon(Icons.broken_image_outlined, size: 40, color: AppColors.textSecondary.withValues(alpha: 0.4)),
+                  child: Icon(
+                    Icons.broken_image_outlined,
+                    size: 40,
+                    color: AppColors.textSecondary.withValues(alpha: 0.4),
+                  ),
                 ),
               )
             : Center(
-                child: Icon(Icons.phone_iphone_outlined, size: 56, color: AppColors.textSecondary.withValues(alpha: 0.4)),
+                child: Icon(
+                  Icons.phone_iphone_outlined,
+                  size: 56,
+                  color: AppColors.textSecondary.withValues(alpha: 0.4),
+                ),
               ),
       ),
     ),

@@ -1,5 +1,6 @@
 import 'package:buildwithnuel/core/utils/launch_url.dart';
 import 'package:buildwithnuel/core/widgets/engineering_stack.dart';
+import 'package:buildwithnuel/core/widgets/live_demo_modal.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
 import 'package:flutter/material.dart';
@@ -421,7 +422,7 @@ class _ProjectGridCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          /*color: AppColors.surface,*/ //TODO: adjust
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.border),
         ),
@@ -491,7 +492,7 @@ class _ProjectGridCard extends StatelessWidget {
                     children: [
                       if (project.repoUrl != null) ...[
                         InkWell(
-                          onTap: () => launchExternalUrl(project.repoUrl!),
+                          onTap: () => LiveDemoModal.show(context, appUrl: project.demoUrl!, title: project.title),
                           child: Row(
                             children: [
                               HugeIcon(
@@ -601,10 +602,8 @@ class _SectionHeader extends StatelessWidget {
 
 class _GlowBentoCard extends StatefulWidget {
   final Widget child;
-  final EdgeInsetsGeometry padding;
   const _GlowBentoCard({
     required this.child,
-    this.padding = const EdgeInsets.all(16),
   });
 
   @override
@@ -641,7 +640,7 @@ class _GlowBentoCardState extends State<_GlowBentoCard>
       animation: _glow,
       builder: (context, child) => Container(
         width: double.infinity,
-        padding: widget.padding,
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppColors.surface.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(16),

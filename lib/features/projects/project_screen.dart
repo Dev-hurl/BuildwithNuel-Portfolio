@@ -1,3 +1,4 @@
+import 'package:buildwithnuel/core/widgets/live_demo_modal.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
 import 'package:flutter/material.dart';
@@ -196,9 +197,15 @@ class _ProjectFeatureCard extends StatelessWidget {
           children: project.techStack
               .map((tech) => _TechBadge(label: tech))
               .toList(),
-        ),
+        ),//TODO : fix
         SizedBox(height: 16),*/
-        Text(project.title, style: textTheme.titleLarge),
+        Text(
+          project.title,
+          style: textTheme.labelLarge?.copyWith(
+            fontFamily: AppFonts.heading,
+            color: AppColors.textPrimary,
+          ),
+        ),
         SizedBox(height: 8),
         Text(project.tagline, style: textTheme.labelSmall),
         SizedBox(height: 20),
@@ -214,7 +221,13 @@ class _ProjectFeatureCard extends StatelessWidget {
             if (project.demoUrl != null) ...[
               SizedBox(width: 12),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  LiveDemoModal.show(
+                    context,
+                    appUrl: project.demoUrl!,
+                    title: project.title,
+                  );
+                },
                 child: Text(
                   'Live demo',
                   style: TextStyle(fontFamily: AppFonts.body),
