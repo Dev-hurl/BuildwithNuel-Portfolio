@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 enum DeviceFrame { iphone, android, tablet }
 
-class _FrameSpec {
+class FrameSpec {
   final double aspectRatio;
   final double bezelWidth;
   final double cornerRadius;
   final Widget? notch;
 
-  const _FrameSpec({
+  const FrameSpec({
     required this.aspectRatio,
     required this.bezelWidth,
     required this.cornerRadius,
@@ -18,8 +18,8 @@ class _FrameSpec {
   });
 }
 
-final Map<DeviceFrame, _FrameSpec> _frameSpecs = {
-  DeviceFrame.iphone: _FrameSpec(
+final Map<DeviceFrame, FrameSpec> frameSpecs = {
+  DeviceFrame.iphone: FrameSpec(
     aspectRatio: 9 / 19.5,
     bezelWidth: 10,
     cornerRadius: 44,
@@ -28,7 +28,7 @@ final Map<DeviceFrame, _FrameSpec> _frameSpecs = {
       decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(14)),
     ),
   ),
-  DeviceFrame.android: _FrameSpec(
+  DeviceFrame.android: FrameSpec(
     aspectRatio: 9 / 19,
     bezelWidth: 6,
     cornerRadius: 28,
@@ -37,7 +37,7 @@ final Map<DeviceFrame, _FrameSpec> _frameSpecs = {
       decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
     ),
   ),
-  DeviceFrame.tablet: _FrameSpec(aspectRatio: 3 / 4, bezelWidth: 14, cornerRadius: 20, notch: null),
+  DeviceFrame.tablet: FrameSpec(aspectRatio: 3 / 4, bezelWidth: 14, cornerRadius: 20, notch: null),
 };
 
 class LiveAppEmbed extends StatefulWidget {
@@ -82,7 +82,7 @@ class _DeviceFrameEmbedState extends State<DeviceFrameEmbed> {
 
   @override
   Widget build(BuildContext context) {
-    final spec = _frameSpecs[_selected]!;
+    final spec = frameSpecs[_selected]!;
 
     return Column(
       children: [
