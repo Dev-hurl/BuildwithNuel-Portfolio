@@ -1,5 +1,4 @@
 import 'package:buildwithnuel/core/widgets/live_app_embed.dart';
-import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_fonts.dart';
@@ -43,7 +42,7 @@ class LiveDemoModal extends StatelessWidget {
               vertical: _margin,
             )
           : EdgeInsets.zero,
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Column(

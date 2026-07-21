@@ -9,6 +9,7 @@ final List<ProjectModel> projects = [
     description:
         'TODO: 2-3 sentences on the problem OrbiTask solves for its user.',
     role: 'Solo Developer & UX/UI Designer',
+    year: '2025',
     techStack: ['Flutter', 'Provider', 'Firebase',],
     screenshotUrls: [
       'assets/images/orbitask.jpg',
@@ -28,6 +29,7 @@ final List<ProjectModel> projects = [
     description:
         'SwiftMart is a modern e-commerce app designed to make online shopping seamless, especially for first-time users. The project emphasizes ease of use, fast onboarding, and a smooth guest checkout experience. ',
     role: 'Developer & UX/UI Designer',
+    year: '2025',
     techStack: ['Flutter', 'Chatgpt'],
     screenshotUrls: [
       'assets/images/swiftmart.jpg',
@@ -46,6 +48,7 @@ final List<ProjectModel> projects = [
     tagline: 'TODO',
     description: 'TODO',
     role: 'Solo Developer',
+    year: 'null',
     techStack: ['Flutter',],
     screenshotUrls: [],
     challenge: 'TODO',

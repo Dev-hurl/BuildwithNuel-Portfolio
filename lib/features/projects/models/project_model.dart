@@ -4,6 +4,7 @@ class ProjectModel {
   final String tagline;
   final String description;
   final String role;
+  final String year;
   final List<String> techStack;
   final List<String> screenshotUrls;
   final String challenge;
@@ -17,6 +18,7 @@ class ProjectModel {
     required this.tagline,
     required this.description,
     required this.role,
+    required this.year,
     required this.techStack,
     required this.screenshotUrls,
     required this.challenge,

@@ -1,8 +1,6 @@
-import 'package:buildwithnuel/core/utils/launch_url.dart';
 import 'package:buildwithnuel/core/widgets/engineering_stack.dart';
-import 'package:buildwithnuel/core/widgets/live_demo_modal.dart';
+import 'package:buildwithnuel/core/widgets/projects_list_card.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
-import 'package:buildwithnuel/features/projects/models/project_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -377,18 +375,12 @@ class _ProjectsSection extends StatelessWidget {
   }
 
   Widget _buildGrid(double maxWidth) {
-    const spacing = 16.0;
-    const columns = 3;
-    final cardWidth = (maxWidth - spacing * (columns - 1)) / columns;
-
-    return Wrap(
-      spacing: spacing,
-      runSpacing: spacing,
+    return Column(
       children: projects
           .map(
-            (p) => SizedBox(
-              width: cardWidth,
-              child: _ProjectGridCard(project: p),
+            (p) => Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: ProjectListCard(project: p),
             ),
           )
           .toList(),
@@ -400,151 +392,11 @@ class _ProjectsSection extends StatelessWidget {
       children: projects
           .map(
             (p) => Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: _ProjectGridCard(project: p),
+              padding: EdgeInsets.only(bottom: 16),
+              child: ProjectListCard(project: p),
             ),
           )
           .toList(),
-    );
-  }
-}
-
-class _ProjectGridCard extends StatelessWidget {
-  final ProjectModel project;
-  const _ProjectGridCard({required this.project});
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
-    return InkWell(
-      onTap: () => context.go('/projects/${project.slug}'),
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.surface, //TODO: adjust
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.border),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Container(
-                width: double.infinity,
-                color: AppColors.surfaceVariant,
-                child: project.screenshotUrls.isNotEmpty
-                    ? Image.asset(
-                        project.screenshotUrls.first,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Center(
-                          child: Icon(
-                            Icons.broken_image_outlined,
-                            size: 28,
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                      )
-                    : Center(
-                        child: HugeIcon(
-                          icon: HugeIcons.strokeRoundedImage02,
-                          size: 28,
-                          color: AppColors.textSecondary,
-                        ),
-                      ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    project.techStack.isNotEmpty
-                        ? project.techStack.join(' · ').toUpperCase()
-                        : 'PROJECT',
-                    style: textTheme.labelMedium?.copyWith(
-                      color: AppColors.textSecondary,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    project.title,
-                    style: textTheme.labelLarge?.copyWith(
-                      fontFamily: AppFonts.heading,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Divider(color: AppColors.border, height: 1),
-                  SizedBox(height: 16),
-                  Text(
-                    project.tagline,
-                    style: textTheme.labelMedium,
-                    maxLines: 3,
-                    //overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 24),
-                  Row(
-                    children: [
-                      if (project.repoUrl != null) ...[
-                        InkWell(
-                          onTap: () => launchExternalUrl(project.repoUrl!),
-                          child: Row(
-                            children: [
-                              HugeIcon(
-                                icon: HugeIcons.strokeRoundedGithub,
-                                size: 14,
-                                color: AppColors.success,
-                                strokeWidth: 2,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                'SOURCE',
-                                style: textTheme.labelMedium?.copyWith(
-                                  fontWeight: AppFonts.subheadingWeight,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 16),
-                      ],
-                      if (project.demoUrl != null) ...[
-                        InkWell(
-                          onTap: () => context.go(
-                            '/projects/${project.slug}?section=demo',
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.arrow_outward,
-                                size: 14,
-                                color: AppColors.success,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                'LIVE',
-                                style: textTheme.labelMedium?.copyWith(
-                                  color: AppColors.success,
-                                  fontWeight: AppFonts.subheadingWeight,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -602,9 +454,7 @@ class _SectionHeader extends StatelessWidget {
 
 class _GlowBentoCard extends StatefulWidget {
   final Widget child;
-  const _GlowBentoCard({
-    required this.child,
-  });
+  const _GlowBentoCard({required this.child});
 
   @override
   State<_GlowBentoCard> createState() => _GlowBentoCardState();
