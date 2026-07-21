@@ -1,5 +1,4 @@
 import 'package:buildwithnuel/core/constants/app_colors.dart';
-import 'package:buildwithnuel/core/widgets/live_app_embed.dart';
 import 'package:buildwithnuel/core/widgets/live_demo_modal.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
@@ -80,7 +79,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Live Demo', style: textTheme.titleLarge),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
                       LiveDemoModal.show(context, appUrl: project.demoUrl!, title: project.title);//TODO: Adjust Device preview

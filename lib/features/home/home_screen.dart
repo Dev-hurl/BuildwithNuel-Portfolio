@@ -422,7 +422,7 @@ class _ProjectGridCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: Container(
         decoration: BoxDecoration(
-          /*color: AppColors.surface,*/ //TODO: adjust
+          color: AppColors.surface, //TODO: adjust
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.border),
         ),
@@ -492,7 +492,7 @@ class _ProjectGridCard extends StatelessWidget {
                     children: [
                       if (project.repoUrl != null) ...[
                         InkWell(
-                          onTap: () => LiveDemoModal.show(context, appUrl: project.demoUrl!, title: project.title),
+                          onTap: () => launchExternalUrl(project.repoUrl!),
                           child: Row(
                             children: [
                               HugeIcon(
