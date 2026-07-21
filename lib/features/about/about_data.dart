@@ -1,76 +1,46 @@
 class WorkExperience {
   final String company;
-  final String period;
+  final bool isCurrent;
+  final String type; // e.g. 'Internship', 'Full-time'
   final String role;
-  final List<String> highlights;
+  final String period; // e.g. 'May 2025 – July 2025'
+  final String location;
+  final String description;
+  final List<String> techStack;
 
   const WorkExperience({
     required this.company,
-    required this.period,
+    this.isCurrent = false,
+    required this.type,
     required this.role,
-    required this.highlights,
+    required this.period,
+    required this.location,
+    required this.description,
+    required this.techStack,
   });
 }
 
-class SkillEntry {
-  final String title;
-  final String description;
-
-  const SkillEntry({required this.title, required this.description});
-}
-
-const String aboutBio =
-    'TODO: 2-3 paragraphs — who you are, what you build, what you care about as a developer.';
-
-const List<WorkExperience> workExperience = [
+const workExperiences = [
   WorkExperience(
     company: 'Fiverr',
-    period: '2024 - Present',
-    role: 'Flutter Developer',
-    highlights: [
-      'TODO: what you actually did on this',
-      'TODO: what you actually did on this',
-      'TODO: what you actually did on this',
-      'TODO: what you actually did on this',
-    ],
+    role: 'Flutter Developer & UX/UI Designer',
+    isCurrent: true,
+    type: 'Freelance',
+    period: 'January 2022 – Present',
+    location: 'Remote',
+    description:
+        'Building mobile and web applications for clients across various industries, focusing on Flutter development and user experience design.',
+    techStack: ['Flutter', 'Dart', 'Firebase', 'Supabase', 'Figma'],
   ),
   WorkExperience(
-    company: 'Upwork',
-    period: '2024 - Present',
-    role: 'UX/UI Designer',
-    highlights: [
-      'TODO: what you actually did on this what you actually did on this',
-      'TODO: what you actually did on this',
-      'TODO: what you actually did on this',
-      'TODO: what you actually did on this',
-    ],
-  ),
-  WorkExperience(
-    company: 'Freelance',
-    period: '2024 - Present',
-    role: 'UX/UI Designer',
-    highlights: [
-      'TODO: what you actually did on this',
-      'TODO: what you actually did on this',
-      'TODO: what you actually did on this',
-      'TODO: what you actually did on this',
-    ],
-  ),
-];
-
-const List<SkillEntry> technicalSkills = [
-  SkillEntry(
-    title: 'Mobile App Development',
+    company: 'Tech Solutions Inc.',
+    role: 'Software Engineer',
+    isCurrent: false,
+    type: 'Full-time',
+    period: 'June 2020 – December 2021',
+    location: 'New York, NY',
     description:
-        'Building cross-platform apps with Flutter and Dart, using Provider for state management and Firebase for backend services.',
-  ),
-  SkillEntry(
-    title: 'UI/UX Design',
-    description:
-        'Figma-first design process — wireframing and prototyping before implementation, with a focus on reusable design systems.',
-  ),
-  SkillEntry(
-    title: 'TODO: third skill area',
-    description: 'TODO',
+        'Developed and maintained web applications, collaborated with cross-functional teams, and implemented new features based on client requirements.',
+    techStack: ['JavaScript', 'React', 'Node.js', 'SQL'],
   ),
 ];

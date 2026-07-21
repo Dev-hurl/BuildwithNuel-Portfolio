@@ -1,12 +1,15 @@
+
 import 'package:buildwithnuel/core/widgets/engineering_stack.dart';
 import 'package:buildwithnuel/core/widgets/projects_list_card.dart';
+import 'package:buildwithnuel/features/about/about_data.dart';
+import 'package:buildwithnuel/features/about/experience_card.dart';
+import 'package:buildwithnuel/features/about/profile_card.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_fonts.dart';
-import '../about/about_data.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -25,13 +28,14 @@ class HomeScreen extends StatelessWidget {
             children: [
               _buildHero(context, textTheme),
               SizedBox(height: 80),
-              _buildWhoIAmCard(context, textTheme),
-              SizedBox(height: 80),
+              ProfileCard(),
+              SizedBox(height: 60),
               EngineeringStackSection(),
+              SizedBox(height: 60),
               _WorkExperienceSection(),
-              SizedBox(height: 80),
+              SizedBox(height: 60),
               _ProjectsSection(),
-              SizedBox(height: 80),
+              SizedBox(height: 60),
             ],
           ),
         ),
@@ -43,7 +47,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(20),
@@ -53,7 +57,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.circle, size: 8, color: AppColors.success),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 'Available for freelance work',
                 style: TextStyle(
@@ -118,8 +122,8 @@ class HomeScreen extends StatelessWidget {
             ),
             OutlinedButton.icon(
               onPressed: () => context.go('/contact'),
-              icon: const Icon(Icons.mail_outline, size: 18),
-              label: const Text('Get in Touch'),
+              icon: Icon(Icons.mail_outline, size: 18),
+              label: Text('Get in Touch'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
                 side: BorderSide(color: AppColors.border),
@@ -137,211 +141,37 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
-
-  Widget _buildWhoIAmCard(BuildContext context, TextTheme textTheme) {
-    return _GlowBentoCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'WHO I AM',
-            style: TextStyle(
-              fontFamily: AppFonts.body,
-              fontSize: 11,
-              letterSpacing: 1,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textSecondary,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text.rich(
-            TextSpan(
-              style: textTheme.headlineMedium,
-              children: [
-                const TextSpan(text: 'Full Stack\n'),
-                TextSpan(
-                  text: 'Engineer\n',
-                  style: TextStyle(color: AppColors.success),
-                ),
-                const TextSpan(text: 'Motion UI\n'),
-                const TextSpan(text: 'Premium\n'),
-                TextSpan(
-                  text: 'Design',
-                  style: TextStyle(color: AppColors.success),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            "Turning code into experiences you feel, remember, and can't stop coming back to.",
-            style: textTheme.bodyMedium,
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 // ── EXPERIENCE SECTION ──────────────────────────────────────
 
 class _WorkExperienceSection extends StatelessWidget {
   const _WorkExperienceSection();
-  static const double _wideBreakpoint = 800;
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isWide = constraints.maxWidth > _wideBreakpoint;
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const _SectionHeader(
-              eyebrow: 'EXPERIENCE',
-              title: "Where I've ",
-              highlight: 'shipped',
-            ),
-            const SizedBox(height: 24),
-            if (isWide) _buildGrid(constraints.maxWidth) else _buildStack(),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildGrid(double maxWidth) {
-    const spacing = 16.0;
-    const columns = 2;
-    final cardWidth = (maxWidth - spacing * (columns - 1)) / columns;
-
-    final rows = <List<WorkExperience>>[];
-    for (var i = 0; i < workExperience.length; i += columns) {
-      rows.add(workExperience.skip(i).take(columns).toList());
-    }
-
-    return Column(
-      children: rows.map((rowItems) {
-        return Padding(
-          padding: EdgeInsets.only(bottom: rowItems == rows.last ? 0 : spacing),
-          child: IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (var i = 0; i < rowItems.length; i++) ...[
-                  SizedBox(
-                    width: cardWidth,
-                    child: _WorkExperienceCard(experience: rowItems[i]),
-                  ),
-                  if (i != rowItems.length - 1) const SizedBox(width: spacing),
-                ],
-              ],
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget _buildStack() {
-    return Column(
-      children: workExperience
-          .map(
-            (exp) => Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: _WorkExperienceCard(experience: exp),
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
-class _WorkExperienceCard extends StatelessWidget {
-  final WorkExperience experience;
-  const _WorkExperienceCard({required this.experience});
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final trimmed = experience.company.trim();
-    final initials = trimmed.isEmpty
-        ? '?'
-        : trimmed.substring(0, trimmed.length >= 2 ? 2 : 1).toUpperCase();
 
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: AppColors.success.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(
-                    color: AppColors.success.withValues(alpha: 0.25),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    initials,
-                    style: textTheme.bodySmall?.copyWith(
-                      color: AppColors.success,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(experience.company, style: textTheme.bodyMedium),
-                    Text(experience.role, style: textTheme.labelMedium),
-                    SizedBox(height: 6),
-                    Text(experience.period, style: textTheme.labelMedium),
-                  ],
-                ),
-              ),
-            ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(width: 4, height: 20, color: AppColors.success),
+            SizedBox(width: 10),
+            Text('Experience', style: textTheme.titleLarge),
+          ],
+        ),
+        SizedBox(height: 16),
+        Divider(color: AppColors.border),
+        SizedBox(height: 16),
+        ...workExperiences.map(
+          (exp) => Padding(
+            padding: EdgeInsets.only(bottom: 16),
+            child: ExperienceCard(experience: exp),
           ),
-          const SizedBox(height: 16),
-          Divider(color: AppColors.border, height: 6),
-          const SizedBox(height: 16),
-          ...experience.highlights.map(
-            (point) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 6),
-                    child: Icon(
-                      Icons.circle,
-                      size: 4,
-                      color: AppColors.success,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text(point, style: textTheme.labelMedium)),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -366,7 +196,7 @@ class _ProjectsSection extends StatelessWidget {
               title: "Things I've ",
               highlight: 'built',
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             if (isWide) _buildGrid(constraints.maxWidth) else _buildStack(),
           ],
         );
@@ -379,7 +209,7 @@ class _ProjectsSection extends StatelessWidget {
       children: projects
           .map(
             (p) => Padding(
-              padding: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.only(bottom: 12),
               child: ProjectListCard(project: p),
             ),
           )
@@ -392,7 +222,7 @@ class _ProjectsSection extends StatelessWidget {
       children: projects
           .map(
             (p) => Padding(
-              padding: EdgeInsets.only(bottom: 16),
+              padding: EdgeInsets.only(bottom: 8),
               child: ProjectListCard(project: p),
             ),
           )
@@ -448,57 +278,6 @@ class _SectionHeader extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _GlowBentoCard extends StatefulWidget {
-  final Widget child;
-  const _GlowBentoCard({required this.child});
-
-  @override
-  State<_GlowBentoCard> createState() => _GlowBentoCardState();
-}
-
-class _GlowBentoCardState extends State<_GlowBentoCard>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _glow;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    )..repeat(reverse: true);
-    _glow = Tween<double>(
-      begin: 0.15,
-      end: 0.45,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _glow,
-      builder: (context, child) => Container(
-        width: double.infinity,
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppColors.surface.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.success.withValues(alpha: 0.15)),
-        ),
-        child: child,
-      ),
-      child: widget.child,
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_fonts.dart';
 import '../../../core/utils/launch_url.dart';
@@ -21,96 +23,105 @@ class _ProjectListCardState extends State<ProjectListCard> {
     final textTheme = Theme.of(context).textTheme;
     final hasImage = project.screenshotUrls.isNotEmpty;
 
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: SizedBox(
-                  width: 32,
-                  height: 32,
-                  child: hasImage
-                      ? Image.asset(
-                          project.screenshotUrls.first,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              Container(
-                                color: AppColors.surfaceVariant,
-                                child: Icon(
-                                  Icons.apps,
-                                  size: 16,
-                                  color: AppColors.textSecondary,
+    return InkWell(
+      onTap: () {
+        context.go('/projects/${project.slug}');
+      },
+      child: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          border: Border.all(color: AppColors.border),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: SizedBox(
+                    width: 32,
+                    height: 32,
+                    child: hasImage
+                        ? Image.asset(
+                            project.screenshotUrls.first,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Container(
+                                  color: AppColors.surfaceVariant,
+                                  child: Icon(
+                                    Icons.apps,
+                                    size: 16,
+                                    color: AppColors.textSecondary,
+                                  ),
                                 ),
-                              ),
-                        )
-                      : Container(
-                          color: AppColors.surfaceVariant,
-                          child: Icon(
-                            Icons.apps,
-                            size: 16,
-                            color: AppColors.textSecondary,
+                          )
+                        : Container(
+                            color: AppColors.surfaceVariant,
+                            child: Icon(
+                              Icons.apps,
+                              size: 16,
+                              color: AppColors.textSecondary,
+                            ),
                           ),
+                  ),
+                ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        project.title,
+                        style: TextStyle(
+                          fontFamily: AppFonts.body,
+                          fontSize: AppFonts.captionSize,
+                          color: AppColors.textSecondary,
                         ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      project.title,
-                      style: textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
                       ),
-                    ),
-                    Text(project.year, style: textTheme.labelMedium),
-                  ],
+                      Text(project.year, style: textTheme.labelMedium),
+                    ],
+                  ),
                 ),
-              ),
-              if (project.demoUrl != null)
+                if (project.demoUrl != null)
+                  IconButton(
+                    onPressed: () => launchExternalUrl(project.demoUrl!),
+                    icon: HugeIcon(
+                      icon: HugeIcons.strokeRoundedLinkSquare01,
+                      size: 18,
+                      color: AppColors.textSecondary,
+                    ),
+                    tooltip: 'Open live project',
+                  ),
                 IconButton(
-                  onPressed: () => launchExternalUrl(project.demoUrl!),
-                  icon: Icon(
-                    Icons.open_in_new,
+                  onPressed: () => setState(() => _expanded = !_expanded),
+                  icon: HugeIcon(
+                    icon: _expanded
+                        ? HugeIcons.strokeRoundedChevronsDownUp
+                        : HugeIcons.strokeRoundedArrowUpDouble,
                     size: 18,
                     color: AppColors.textSecondary,
                   ),
-                  tooltip: 'Open live project',
+                  tooltip: _expanded ? 'Collapse' : 'Expand',
                 ),
-              IconButton(
-                onPressed: () => setState(() => _expanded = !_expanded),
-                icon: Icon(
-                  _expanded ? Icons.unfold_less : Icons.unfold_more,
-                  size: 18,
-                  color: AppColors.textSecondary,
-                ),
-                tooltip: _expanded ? 'Collapse' : 'Expand',
+              ],
+            ),
+            if (_expanded) ...[
+              SizedBox(height: 12),
+              Text(project.description, style: textTheme.bodyMedium),
+              SizedBox(height: 12),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: project.techStack
+                    .map((tech) => _TechTag(label: tech))
+                    .toList(),
               ),
             ],
-          ),
-          if (_expanded) ...[
-            SizedBox(height: 12),
-            Text(project.description, style: textTheme.bodyMedium),
-            SizedBox(height: 12),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: project.techStack
-                  .map((tech) => _TechTag(label: tech))
-                  .toList(),
-            ),
           ],
-        ],
+        ),
       ),
     );
   }

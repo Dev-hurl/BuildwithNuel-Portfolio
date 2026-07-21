@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -21,8 +20,8 @@ class NavBar extends StatelessWidget {
       label: 'Projects',
       path: '/projects',
     ),
-    (icon: HugeIcons.strokeRoundedUserCircle, label: 'About', path: '/about'),
     (icon: HugeIcons.strokeRoundedMail02, label: 'Contact', path: '/contact'),
+    (icon: HugeIcons.strokeRoundedMoon02, label: null , path: ''),
   ];
 
   @override

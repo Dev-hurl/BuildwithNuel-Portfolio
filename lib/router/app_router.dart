@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import '../core/widgets/nav_bar.dart';
 import '../features/home/home_screen.dart';
-import '../features/about/about_screen.dart';
 import '../features/projects/project_detail_screen.dart';
 import '../features/contact/contact_screen.dart';
 
@@ -57,14 +56,6 @@ final GoRouter appRouter = GoRouter(
             title: 'Buildwithnuel - Flutter Developer & UX/UI Designer',
             color: AppColors.background,
             child: HomeScreen(),
-          ),
-        ),
-        GoRoute(
-          path: '/about',
-          builder: (context, state) => Title(
-            title: 'About - Buildwithnuel',
-            color: AppColors.background,
-            child: AboutScreen(),
           ),
         ),
         GoRoute(
