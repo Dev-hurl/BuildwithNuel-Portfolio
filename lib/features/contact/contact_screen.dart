@@ -188,8 +188,12 @@ class _ContactScreenState extends State<ContactScreen> {
   }
 
   Widget _buildWide(BuildContext context) {
+
+    final width = MediaQuery.of(context).size.width;
+    final isWide = width > 800;
+
     return SingleChildScrollView(
-      padding: EdgeInsets.all(80),
+      padding: EdgeInsets.symmetric(horizontal : isWide? 80 : 52, vertical: 48),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

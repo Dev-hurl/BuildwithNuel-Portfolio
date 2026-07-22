@@ -29,8 +29,15 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
+    final width = MediaQuery.of(context).size.width;
+
+    final isWide = width > 800;
+
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 62, vertical: 32),
+      padding: EdgeInsets.symmetric(
+        horizontal: isWide ? 160 : 52,
+        vertical: 48,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -191,7 +198,6 @@ class _ProjectFeatureCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        
         Text(
           project.title,
           style: textTheme.labelLarge?.copyWith(

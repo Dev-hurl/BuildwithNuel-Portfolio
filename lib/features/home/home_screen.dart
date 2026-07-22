@@ -16,16 +16,19 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final width = MediaQuery.of(context).size.width;
+
+    final isWide = width > 800;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 48, vertical: 32),
+      padding: EdgeInsets.symmetric(horizontal: isWide ? 160 : 52, vertical: 48),
       child: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 1100),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildHero(context, textTheme),
+              //_buildHero(context, textTheme),
               SizedBox(height: 80),
               ProfileCard(),
               SizedBox(height: 60),
