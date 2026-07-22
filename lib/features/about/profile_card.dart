@@ -12,7 +12,7 @@ class ProfileCard extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
@@ -113,7 +113,7 @@ class _AvatarBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: 40,
+      radius: 60,
       backgroundColor: AppColors.surfaceVariant,
       child: ClipOval(
         child: Image.asset(
@@ -121,10 +121,12 @@ class _AvatarBlock extends StatelessWidget {
           width: 100,
           height: 100,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) => HugeIcon(
-            icon: HugeIcons.strokeRoundedUser,
-            size: 36,
-            color: AppColors.textSecondary,
+          errorBuilder: (context, error, stackTrace) => UnconstrainedBox(
+            child: HugeIcon(
+              icon: HugeIcons.strokeRoundedUser,
+              size: 36,
+              color: AppColors.textSecondary,
+            ),
           ),
         ),
       ),
@@ -139,7 +141,7 @@ class _StatusPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: AppColors.surfaceVariant,
         borderRadius: BorderRadius.circular(6),

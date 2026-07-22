@@ -159,7 +159,7 @@ class _ProjectFeatureCard extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: ClipRRect(
-        borderRadius: BorderRadiusGeometry.circular(24),
+        borderRadius: BorderRadiusGeometry.circular(8),
         child: SizedBox(
           width: double.infinity,
           //color: AppColors.surfaceVariant,
@@ -191,14 +191,7 @@ class _ProjectFeatureCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /*Wrap(
-          spacing: 6,
-          runSpacing: 6,
-          children: project.techStack
-              .map((tech) => _TechBadge(label: tech))
-              .toList(),
-        ),//TODO : fix
-        SizedBox(height: 16),*/
+        
         Text(
           project.title,
           style: textTheme.labelLarge?.copyWith(

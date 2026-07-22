@@ -111,7 +111,7 @@ class _ProjectListCardState extends State<ProjectListCard> {
             ),
             if (_expanded) ...[
               SizedBox(height: 12),
-              Text(project.description, style: textTheme.bodyMedium),
+              Text(project.description, style: textTheme.labelMedium),
               SizedBox(height: 12),
               Wrap(
                 spacing: 8,

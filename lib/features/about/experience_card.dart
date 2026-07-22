@@ -90,11 +90,13 @@ class _ExperienceCardState extends State<ExperienceCard> {
                 SizedBox(height: 6),
                 Text(
                   '${exp.type}  |  ${exp.period}  |  ${exp.location}',
-                  style: textTheme.labelMedium,
+                  style: textTheme.labelMedium?.copyWith(
+                    fontWeight: AppFonts.subheadingWeight
+                  ),
                 ),
                 if (_expanded) ...[
                   SizedBox(height: 10),
-                  Text(exp.description, style: textTheme.bodyMedium),
+                  Text(exp.description, style: textTheme.labelMedium,),
                 ],
                 SizedBox(height: 12),
                 Wrap(
