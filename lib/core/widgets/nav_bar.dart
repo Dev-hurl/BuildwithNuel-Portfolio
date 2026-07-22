@@ -21,7 +21,6 @@ class NavBar extends StatelessWidget {
       path: '/projects',
     ),
     (icon: HugeIcons.strokeRoundedMail02, label: 'Contact', path: '/contact'),
-    (icon: HugeIcons.strokeRoundedMoon02, label: null , path: ''),
   ];
 
   @override
