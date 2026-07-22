@@ -76,13 +76,9 @@ class ProfileCard extends StatelessWidget {
                 icon: HugeIcons.strokeRoundedLocation10,
                 text: 'Nigeria',
               ),
-              _InfoRow(
-                icon: HugeIcons.strokeRoundedMail01,
-                text: 'devhurl@email.com',
-              ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           Row(
             children: [
               _SocialLink(
@@ -95,6 +91,12 @@ class ProfileCard extends StatelessWidget {
                 icon: HugeIcons.strokeRoundedNewTwitter,
                 label: 'X',
                 onTap: () => launchExternalUrl('https://x.com/BuildwithNuel'),
+              ),
+              SizedBox(width: 24),
+              _SocialLink(
+                icon: HugeIcons.strokeRoundedMail01,
+                label: 'Mail',
+                onTap: () => launchExternalUrl('mailto:devhurl7@gmail.com'),
               ),
             ],
           ),
@@ -140,7 +142,7 @@ class _StatusPill extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: AppColors.surfaceVariant,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(6),
         border: Border.all(color: AppColors.border),
       ),
       child: Row(
@@ -224,10 +226,19 @@ class _SocialLink extends StatelessWidget {
           SizedBox(
             height: 24,
             width: 24,
-            child: HugeIcon(
-              icon: icon,
-              size: 16,
-              color: AppColors.textSecondary,
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.surfaceVariant,
+                border: Border.all(color: AppColors.border),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: UnconstrainedBox(
+                child: HugeIcon(
+                  icon: icon,
+                  size: 16,
+                  color: AppColors.textSecondary,
+                ),
+              ),
             ),
           ),
           SizedBox(width: 6),

@@ -32,6 +32,7 @@ class _ProjectListCardState extends State<ProjectListCard> {
         decoration: BoxDecoration(
           color: AppColors.surface,
           border: Border.all(color: AppColors.border),
+          borderRadius: BorderRadius.circular(6),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

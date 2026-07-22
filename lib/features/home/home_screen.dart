@@ -1,4 +1,3 @@
-
 import 'package:buildwithnuel/core/widgets/engineering_stack.dart';
 import 'package:buildwithnuel/core/widgets/projects_list_card.dart';
 import 'package:buildwithnuel/features/about/about_data.dart';
@@ -159,7 +158,14 @@ class _WorkExperienceSection extends StatelessWidget {
           children: [
             Container(width: 4, height: 20, color: AppColors.success),
             SizedBox(width: 10),
-            Text('Experience', style: textTheme.titleLarge),
+            Text(
+              'Experience',
+              style: textTheme.titleMedium?.copyWith(
+                color: AppColors.textPrimary,
+                fontFamily: AppFonts.heading,
+                fontWeight: AppFonts.titleWeight,
+              ),
+            ),
           ],
         ),
         SizedBox(height: 16),
@@ -253,18 +259,21 @@ class _SectionHeader extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(width: 20, height: 2, color: AppColors.success),
-            const SizedBox(width: 8),
+            Container(width: 4, height: 20, color: AppColors.success),
+            SizedBox(width: 10),
             Text(
               eyebrow,
-              style: textTheme.labelMedium?.copyWith(
-                color: AppColors.success,
+              style: textTheme.titleMedium?.copyWith(
+                color: AppColors.textPrimary,
                 fontFamily: AppFonts.heading,
+                fontWeight: AppFonts.titleWeight,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 16),
+        Divider(color: AppColors.border),
+        SizedBox(height: 12),
         Text.rich(
           TextSpan(
             style: textTheme.headlineMedium,

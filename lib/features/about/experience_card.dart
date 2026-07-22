@@ -1,5 +1,6 @@
 import 'package:buildwithnuel/features/about/about_data.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_fonts.dart';
 
@@ -23,7 +24,7 @@ class _ExperienceCardState extends State<ExperienceCard> {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
         border: Border.all(color: AppColors.border),
       ),
       child: Column(
@@ -31,7 +32,7 @@ class _ExperienceCardState extends State<ExperienceCard> {
         children: [
           Row(
             children: [
-              _IconBox(icon: Icons.work_outline),
+              _IconBox(icon: HugeIcons.strokeRoundedWork),
               SizedBox(width: 10),
               Text(
                 exp.company,
@@ -64,8 +65,8 @@ class _ExperienceCardState extends State<ExperienceCard> {
               children: [
                 Row(
                   children: [
-                    _IconBox(icon: Icons.code),
-                    const SizedBox(width: 10),
+                    _IconBox(icon: HugeIcons.strokeRounded3rdBracket),
+                    SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         exp.role,
@@ -76,24 +77,26 @@ class _ExperienceCardState extends State<ExperienceCard> {
                     ),
                     IconButton(
                       onPressed: () => setState(() => _expanded = !_expanded),
-                      icon: Icon(
-                        _expanded ? Icons.unfold_less : Icons.unfold_more,
+                      icon: HugeIcon(
+                        icon: _expanded
+                            ? HugeIcons.strokeRoundedUnfoldLess
+                            : HugeIcons.strokeRoundedUnfoldMore,
                         size: 18,
                         color: AppColors.textSecondary,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6),
                 Text(
                   '${exp.type}  |  ${exp.period}  |  ${exp.location}',
                   style: textTheme.labelMedium,
                 ),
                 if (_expanded) ...[
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Text(exp.description, style: textTheme.bodyMedium),
                 ],
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -111,7 +114,7 @@ class _ExperienceCardState extends State<ExperienceCard> {
 }
 
 class _IconBox extends StatelessWidget {
-  final IconData icon;
+  final dynamic icon;
   const _IconBox({required this.icon});
 
   @override
@@ -123,7 +126,9 @@ class _IconBox extends StatelessWidget {
         color: AppColors.surfaceVariant,
         borderRadius: BorderRadius.circular(6),
       ),
-      child: Icon(icon, size: 14, color: AppColors.textSecondary),
+      child: UnconstrainedBox(
+        child: HugeIcon(icon: icon, size: 18, color: AppColors.textSecondary),
+      ),
     );
   }
 }
@@ -135,7 +140,7 @@ class _TechTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(6),

@@ -46,7 +46,6 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
-      color: AppColors.background,
       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,18 +53,20 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
           // section label
           Row(
             children: [
-              Container(width: 24, height: 2, color: Colors.green),
+              Container(width: 4, height: 20, color: AppColors.success),
               SizedBox(width: 8),
               Text(
-                'ENGINEERING STACK',
-                style: textTheme.labelMedium?.copyWith(
-                  color: AppColors.success,
+                'Engineering Stack',
+                style: textTheme.titleMedium?.copyWith(
+                  color: AppColors.textPrimary,
                   fontFamily: AppFonts.heading,
+                  fontWeight: AppFonts.titleWeight,
                 ),
               ),
             ],
           ),
-
+          SizedBox(height: 16),
+          Divider(color: AppColors.border),
           SizedBox(height: 16),
 
           // heading
@@ -130,10 +131,7 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
                       ),
                     ),
                     SizedBox(width: 4),
-                    Text(
-                      skill.name,
-                      style: textTheme.labelMedium,
-                    ),
+                    Text(skill.name, style: textTheme.labelMedium),
                   ],
                 );
               },
