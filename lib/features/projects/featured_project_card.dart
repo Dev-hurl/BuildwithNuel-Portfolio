@@ -64,28 +64,17 @@ class FeaturedProjectCard extends StatelessWidget {
                                 ),
                               ),
                               if (project.demoUrl != null)
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: AppColors.white.withValues(
-                                      alpha: 0.7,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24),
+                                IconButton(
+                                  onPressed: () =>
+                                      launchExternalUrl(project.demoUrl!),
+                                  icon: Icon(
+                                    Icons.open_in_new,
+                                    size: 16,
+                                    color: AppColors.primary,
                                   ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(6.0),
-                                    child: IconButton(
-                                      onPressed: () =>
-                                          launchExternalUrl(project.demoUrl!),
-                                      icon: Icon(
-                                        Icons.open_in_new,
-                                        size: 16,
-                                        color: AppColors.primary,
-                                      ),
-                                      tooltip: 'Open live demo',
-                                      padding: EdgeInsets.zero,
-                                      constraints: BoxConstraints(),
-                                    ),
-                                  ),
+                                  tooltip: 'Open live demo',
+                                  padding: EdgeInsets.zero,
+                                  constraints: BoxConstraints(),
                                 ),
                             ],
                           ),
