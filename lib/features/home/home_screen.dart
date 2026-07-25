@@ -3,6 +3,7 @@ import 'package:buildwithnuel/core/widgets/projects_list_card.dart';
 import 'package:buildwithnuel/features/about/about_data.dart';
 import 'package:buildwithnuel/features/about/experience_card.dart';
 import 'package:buildwithnuel/features/about/profile_card.dart';
+import 'package:buildwithnuel/features/projects/featured_project_card.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,126 +20,28 @@ class HomeScreen extends StatelessWidget {
     final isWide = width > 800;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: isWide ? 120 : 40, vertical: 48),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 1100),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              //_buildHero(context, textTheme),
-              SizedBox(height: 80),
-              ProfileCard(),
-              SizedBox(height: 60),
-              EngineeringStackSection(),
-              SizedBox(height: 60),
-              _WorkExperienceSection(),
-              SizedBox(height: 60),
-              _ProjectsSection(),
-              SizedBox(height: 60),
-            ],
-          ),
-        ),
+      padding: EdgeInsets.symmetric(
+        horizontal: isWide ? 120 : 40,
+        vertical: 48,
       ),
-    );
-  }
-
-  Widget _buildHero(BuildContext context, TextTheme textTheme) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.border),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.circle, size: 8, color: AppColors.success),
-              SizedBox(width: 8),
-              Text(
-                'Available for freelance work',
-                style: TextStyle(
-                  fontFamily: AppFonts.body,
-                  fontSize: AppFonts.captionSize,
-                  color: AppColors.textSecondary,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 24),
-        Text.rich(
-          TextSpan(
-            style: textTheme.headlineMedium,
-            children: [
-              const TextSpan(text: 'Building Flutter apps '),
-              TextSpan(
-                text: 'that feel right.',
-                style: TextStyle(color: AppColors.textSecondary),
-              ),
-            ],
-          ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 16),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 480),
-          child: Text(
-            'Flutter developer & UX/UI designer building apps across fintech, SaaS, and productivity.',
-            textAlign: TextAlign.center,
-            style: textTheme.bodyMedium,
-          ),
-        ),
-        const SizedBox(height: 32),
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 16,
-          runSpacing: 16,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            ElevatedButton.icon(
-              onPressed: () => context.go('/projects'),
-              icon: const Icon(Icons.arrow_forward, size: 18),
-              label: Text(
-                'View Projects',
-                style: textTheme.labelLarge?.copyWith(
-                  color: AppColors.textPrimary,
-                  fontWeight: AppFonts.subheadingWeight,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: AppColors.textPrimary,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 14,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ),
-            OutlinedButton.icon(
-              onPressed: () => context.go('/contact'),
-              icon: Icon(Icons.mail_outline, size: 18),
-              label: Text('Get in Touch'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.textPrimary,
-                side: BorderSide(color: AppColors.border),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 14,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ),
+            SizedBox(height: 80),
+            ProfileCard(),
+            SizedBox(height: 60),
+            EngineeringStackSection(),
+            SizedBox(height: 60),
+            _FeaturedProjectsSection(),
+            _WorkExperienceSection(),
+            SizedBox(height: 60),
+            _ProjectsSection(),
+            SizedBox(height: 60),
           ],
         ),
-      ],
+      ),
     );
   }
 }
@@ -179,6 +82,65 @@ class _WorkExperienceSection extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _FeaturedProjectsSection extends StatelessWidget {
+  const _FeaturedProjectsSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final featured = projects.take(2).toList();
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth > 800;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Featured Projects', style: textTheme.titleLarge),
+                TextButton.icon(
+                  onPressed: () => context.go('/projects'),
+                  icon: const Icon(Icons.arrow_outward, size: 14),
+                  label: const Text('View All Work'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            if (isWide)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: featured
+                    .map(
+                      (p) => Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: FeaturedProjectCard(project: p),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              )
+            else
+              Column(
+                children: featured
+                    .map(
+                      (p) => Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: FeaturedProjectCard(project: p),
+                      ),
+                    )
+                    .toList(),
+              ),
+          ],
+        );
+      },
     );
   }
 }

@@ -12,33 +12,7 @@ class EngineeringStackSection extends StatefulWidget {
       _EngineeringStackSectionState();
 }
 
-class _EngineeringStackSectionState extends State<EngineeringStackSection>
-    with SingleTickerProviderStateMixin {
-  late ScrollController _scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _startScroll());
-  }
-
-  void _startScroll() async {
-    while (mounted) {
-      await _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        duration: const Duration(seconds: 20),
-        curve: Curves.linear,
-      );
-      _scrollController.jumpTo(0);
-    }
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
+class _EngineeringStackSectionState extends State<EngineeringStackSection>  {
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +41,6 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
           SizedBox(height: 16),
           Divider(color: AppColors.border),
           SizedBox(height: 16),
-
           // heading
           Text.rich(
             TextSpan(
@@ -81,16 +54,12 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
               ],
             ),
           ),
-
           SizedBox(height: 16),
-
           Text(
             'Mobile apps, beautiful UIs, and scalable backends.',
             style: textTheme.labelMedium,
           ),
-
           SizedBox(height: 48),
-
           // divider + label
           Row(
             children: [
@@ -103,7 +72,6 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
               Expanded(child: Divider(color: AppColors.textSecondary)),
             ],
           ),
-
           SizedBox(height: 24),
           SkillsSection(),
         ],

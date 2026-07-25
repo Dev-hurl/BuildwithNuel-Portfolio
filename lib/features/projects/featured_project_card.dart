@@ -1,0 +1,165 @@
+import 'dart:ui';
+import 'package:buildwithnuel/features/projects/models/project_model.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../core/constants/app_colors.dart';
+import '../../../core/constants/app_fonts.dart';
+import '../../../core/utils/launch_url.dart';
+
+class FeaturedProjectCard extends StatelessWidget {
+  final ProjectModel project;
+  const FeaturedProjectCard({super.key, required this.project});
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final hasImage = project.screenshotUrls.isNotEmpty;
+
+    return InkWell(
+      onTap: () => context.go('/projects/${project.slug}'),
+      borderRadius: BorderRadius.circular(16),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: AspectRatio(
+          aspectRatio: 4 / 3,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              // Layer 1 — image fills the whole card
+              hasImage
+                  ? Image.asset(
+                      project.screenshotUrls.first,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) =>
+                          Container(color: AppColors.surfaceVariant),
+                    )
+                  : Container(color: AppColors.surfaceVariant),
+
+              // Layer 2 — fixed-height frosted panel, bottom, full width
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 4),
+                    child: Container(
+                      height: 120,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      color: AppColors.surfaceVariant.withValues(alpha: 0.35),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  project.title,
+                                  style: textTheme.headlineMedium?.copyWith(
+                                    fontSize: AppFonts.titleSize,
+                                  ),
+                                ),
+                              ),
+                              if (project.demoUrl != null)
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.white.withValues(
+                                      alpha: 0.7,
+                                    ),
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(6.0),
+                                    child: IconButton(
+                                      onPressed: () =>
+                                          launchExternalUrl(project.demoUrl!),
+                                      icon: Icon(
+                                        Icons.open_in_new,
+                                        size: 16,
+                                        color: AppColors.primary,
+                                      ),
+                                      tooltip: 'Open live demo',
+                                      padding: EdgeInsets.zero,
+                                      constraints: BoxConstraints(),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            project.tagline,
+                            style: textTheme.labelMedium?.copyWith(
+                              color: AppColors.textPrimary,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: SizedBox(
+                                  width: 32,
+                                  height: 32,
+                                  child: hasImage
+                                      ? Image.asset(
+                                          project.screenshotUrls.first,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Container(
+                                          color: AppColors.surfaceVariant,
+                                        ),
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Wrap(
+                                  spacing: 6,
+                                  children: project.techStack
+                                      .take(3)
+                                      .map(
+                                        (tech) => Container(
+                                          decoration: BoxDecoration(
+                                            color: AppColors.surfaceVariant,
+                                            border: Border.all(
+                                              color: AppColors.border,
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                              6,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 6.0,
+                                              vertical: 4,
+                                            ),
+                                            child: Text(
+                                              tech,
+                                              style: textTheme.labelMedium,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
