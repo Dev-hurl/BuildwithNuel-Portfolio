@@ -1,7 +1,7 @@
 // engineering_stack_section.dart
 import 'package:buildwithnuel/core/constants/app_colors.dart';
 import 'package:buildwithnuel/core/constants/app_fonts.dart';
-import 'package:buildwithnuel/core/models/skill_model.dart';
+import 'package:buildwithnuel/features/about/skill_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -108,35 +108,7 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
           SizedBox(height: 24),
 
           // scrolling skills row
-          SizedBox(
-            height: 48,
-            child: ListView.separated(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: skills.length * 3, // repeat for seamless loop
-              separatorBuilder: (_, _) => const SizedBox(width: 32),
-              itemBuilder: (context, index) {
-                final skill = skills[index % skills.length];
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      skill.iconPath,
-                      width: 20,
-                      height: 20,
-                      colorFilter: ColorFilter.mode(
-                        AppColors.success.withValues(alpha: 0.65),
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                    SizedBox(width: 4),
-                    Text(skill.name, style: textTheme.labelMedium),
-                  ],
-                );
-              },
-            ),
-          ),
+          SkillsSection(),
         ],
       ),
     );

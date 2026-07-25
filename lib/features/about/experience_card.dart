@@ -17,6 +17,7 @@ class _ExperienceCardState extends State<ExperienceCard> {
 
   @override
   Widget build(BuildContext context) {
+    
     final exp = widget.experience;
     final textTheme = Theme.of(context).textTheme;
 

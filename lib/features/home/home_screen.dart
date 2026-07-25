@@ -6,7 +6,6 @@ import 'package:buildwithnuel/features/about/profile_card.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hugeicons/hugeicons.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_fonts.dart';
 
@@ -15,13 +14,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final width = MediaQuery.of(context).size.width;
 
     final isWide = width > 800;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: isWide ? 160 : 52, vertical: 48),
+      padding: EdgeInsets.symmetric(horizontal: isWide ? 120 : 40, vertical: 48),
       child: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 1100),

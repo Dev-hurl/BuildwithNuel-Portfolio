@@ -35,7 +35,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
 
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(
-        horizontal: isWide ? 160 : 52,
+        horizontal: isWide ? 120 : 48,
         vertical: 48,
       ),
       child: Column(

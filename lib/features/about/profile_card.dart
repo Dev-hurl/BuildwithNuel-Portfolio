@@ -38,15 +38,8 @@ class ProfileCard extends StatelessWidget {
                             style: textTheme.bodyMedium,
                           ),
                         ),
-
-                        SizedBox(width: 6),
-                        Icon(
-                          Icons.verified,
-                          size: 16,
-                          color: AppColors.success,
-                        ),
                         SizedBox(width: 10),
-                        // _StatusPill(label: 'Building side projects'),
+                        //_StatusPill(label: 'Building side projects'),
                       ],
                     ),
                     SizedBox(height: 4),
@@ -61,11 +54,11 @@ class ProfileCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 16),
           Divider(color: AppColors.border, height: 1),
-          SizedBox(height: 20),
+          SizedBox(height: 16),
           Wrap(
-            spacing: 32,
+            spacing: 24,
             runSpacing: 12,
             children: [
               _InfoRow(
