@@ -82,7 +82,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      LiveDemoModal.show(context, appUrl: project.demoUrl!, title: project.title);//TODO: Adjust Device preview
+                      LiveDemoModal.show(context, appUrl: project.demoUrl!, title: project.title);
                     },
                     child: Text('Preview', style: textTheme.labelMedium),
                   ),

@@ -3,7 +3,6 @@ import 'package:buildwithnuel/core/constants/app_colors.dart';
 import 'package:buildwithnuel/core/constants/app_fonts.dart';
 import 'package:buildwithnuel/features/about/skill_chip.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class EngineeringStackSection extends StatefulWidget {
   const EngineeringStackSection({super.key});
@@ -106,8 +105,6 @@ class _EngineeringStackSectionState extends State<EngineeringStackSection>
           ),
 
           SizedBox(height: 24),
-
-          // scrolling skills row
           SkillsSection(),
         ],
       ),
