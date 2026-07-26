@@ -39,7 +39,7 @@ class NavBar extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   decoration: BoxDecoration(
-                    color: AppColors.surface.withValues(alpha: 0.5),
+                    //color: AppColors.surface.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(color: AppColors.border),
                   ),

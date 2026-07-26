@@ -35,6 +35,7 @@ class HomeScreen extends StatelessWidget {
             EngineeringStackSection(),
             SizedBox(height: 60),
             _FeaturedProjectsSection(),
+            SizedBox(height: 60,),
             _WorkExperienceSection(),
             SizedBox(height: 60),
             _ProjectsSection(),
@@ -104,11 +105,31 @@ class _FeaturedProjectsSection extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Featured Projects', style: textTheme.titleLarge),
+                Row(
+                  children: [
+                    Container(width: 4, height: 20, color: AppColors.success),
+                    SizedBox(width: 8),
+                    Text(
+                      'Featured Projects',
+                      style: textTheme.titleMedium?.copyWith(
+                        color: AppColors.textPrimary,
+                        fontFamily: AppFonts.heading,
+                        fontWeight: AppFonts.titleWeight,
+                      ),
+                    ),
+                  ],
+                ),
                 TextButton.icon(
                   onPressed: () => context.go('/projects'),
-                  icon: const Icon(Icons.arrow_outward, size: 14),
-                  label: const Text('View All Work'),
+                  icon: Icon(
+                    Icons.arrow_outward,
+                    size: 14,
+                    color: AppColors.success.withValues(alpha: 0.5),
+                  ),
+                  label: Text(
+                    'View All Work',
+                    style: TextStyle(color: AppColors.success.withValues(alpha: 0.5)),
+                  ),
                 ),
               ],
             ),

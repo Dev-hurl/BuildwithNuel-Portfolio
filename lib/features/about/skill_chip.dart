@@ -20,7 +20,6 @@ const List<SkillItem> langAndFrameworks = [
 // Tools list
 const List<SkillItem> tools = [
   SkillItem(label: 'Firebase', iconPath: 'assets/icons/skills/firebase.svg'),
-  SkillItem(label: 'Firestore', iconPath: 'assets/icons/skills/firestore.svg'),
   SkillItem(label: 'Supabase', iconPath: 'assets/icons/skills/supabase.svg'),
   SkillItem(label: 'VS Code', iconPath: 'assets/icons/skills/vscode.svg'),
   SkillItem(label: 'GitHub', iconPath: 'assets/icons/skills/github.svg'),
@@ -30,7 +29,7 @@ const List<SkillItem> tools = [
     iconPath: 'assets/icons/skills/claude-code.svg',
   ),
   SkillItem(label: 'Figma', iconPath: 'assets/icons/skills/figma.svg'),
-  SkillItem(label: 'Framer', iconPath: 'assets/icons/skills/framer-logo.svg'),
+  SkillItem(label: 'Framer', iconPath: 'assets/icons/skills/framer.svg'),
 ];
 
 class SkillChip extends StatelessWidget {

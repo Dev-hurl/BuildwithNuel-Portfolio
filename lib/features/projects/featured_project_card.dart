@@ -19,7 +19,7 @@ class FeaturedProjectCard extends StatelessWidget {
       onTap: () => context.go('/projects/${project.slug}'),
       borderRadius: BorderRadius.circular(16),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(20),
         child: AspectRatio(
           aspectRatio: 4 / 3,
           child: Stack(
@@ -49,10 +49,30 @@ class FeaturedProjectCard extends StatelessWidget {
                         horizontal: 16,
                         vertical: 8,
                       ),
-                      color: AppColors.surfaceVariant.withValues(alpha: 0.35),
+                      color: AppColors.background.withValues(alpha: 0.2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: hasImage
+                                      ? Image.asset(
+                                          project.screenshotUrls.first,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Container(
+                                          color: AppColors.surfaceVariant,
+                                        ),
+                                ),
+                              ),
+                              
+                            ],
+                          ),
                           Row(
                             children: [
                               Expanded(
@@ -70,7 +90,7 @@ class FeaturedProjectCard extends StatelessWidget {
                                   icon: Icon(
                                     Icons.open_in_new,
                                     size: 16,
-                                    color: AppColors.primary,
+                                    color: AppColors.white,
                                   ),
                                   tooltip: 'Open live demo',
                                   padding: EdgeInsets.zero,
@@ -86,58 +106,6 @@ class FeaturedProjectCard extends StatelessWidget {
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(height: 8),
-                          Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(6),
-                                child: SizedBox(
-                                  width: 32,
-                                  height: 32,
-                                  child: hasImage
-                                      ? Image.asset(
-                                          project.screenshotUrls.first,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : Container(
-                                          color: AppColors.surfaceVariant,
-                                        ),
-                                ),
-                              ),
-                              SizedBox(width: 8),
-                              Expanded(
-                                child: Wrap(
-                                  spacing: 6,
-                                  children: project.techStack
-                                      .take(3)
-                                      .map(
-                                        (tech) => Container(
-                                          decoration: BoxDecoration(
-                                            color: AppColors.surfaceVariant,
-                                            border: Border.all(
-                                              color: AppColors.border,
-                                            ),
-                                            borderRadius: BorderRadius.circular(
-                                              6,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 6.0,
-                                              vertical: 4,
-                                            ),
-                                            child: Text(
-                                              tech,
-                                              style: textTheme.labelMedium,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
-                                ),
-                              ),
-                            ],
                           ),
                         ],
                       ),
