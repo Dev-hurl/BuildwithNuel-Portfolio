@@ -10,18 +10,35 @@ final List<ProjectModel> projects = [
         'TODO: 2-3 sentences on the problem OrbiTask solves for its user.',
     role: 'Solo Developer & UX/UI Designer',
     year: '2025',
-    techStack: ['Flutter', 'Provider', 'Firebase',],
+    techStack: ['Flutter', 'Provider', 'Firebase'],
     screenshotUrls: [
       'assets/images/orbitask.jpg',
       'assets/images/orbitask screenshot.jpg',
     ],
+    appIcon: '',
     challenge:
-        'TODO: e.g. building the two-stage splash animation with chained AnimationControllers',
+        'Ensuring users keep track of thier tasks',
     solution:
         'OrbiTask is designed to help students, professionals, and business owners overcome the challenges of  poor time and task management. The app provides a structured approach by integrating smart  reminders, personalized scheduling, and progress tracking to enhance productivity. Through features  that prioritize tasks, reduce procrastination, and promote consistency, OrbiTask ensures users can  efficiently manage their workload and achieve their goals.',
     repoUrl: 'https://github.com/Dev-hurl/OrbiTask',
     demoUrl: 'https://orbi-task.vercel.app/',
   ),
+  ProjectModel(
+    slug: 'siwft-cel',
+    title: 'SwiftCel',
+    tagline: 'Moving your World Faster',
+    description: 'SwiftCel is a Parcel delivery App',
+    role: 'Flutter developer',
+    year: '2026',
+    techStack: ['Flutter', 'Firebase', '' ],
+    screenshotUrls: [''],
+    appIcon: '',
+    challenge: '',
+    solution: '',
+    repoUrl: 'https://github.com/Dev-hurl/swiftcel',
+    demoUrl: 'https://swift-cel.vercel.app/',
+  ),
+
   ProjectModel(
     slug: 'swift-mart',
     title: 'SwiftMart',
@@ -35,6 +52,7 @@ final List<ProjectModel> projects = [
       'assets/images/swiftmart.jpg',
       'assets/images/swiftmart screenshot.jpg',
     ],
+    appIcon: '',
     challenge:
         'Traditional e-commerce platforms lose new users due to onboarding and checkout friction. Complex forms, mandatory account creation, and tedious steps trigger high cart abandonment and cognitive overload for first-time shoppers.',
     solution:
@@ -49,8 +67,9 @@ final List<ProjectModel> projects = [
     description: 'TODO',
     role: 'Solo Developer',
     year: 'null',
-    techStack: ['Flutter',],
+    techStack: ['Flutter'],
     screenshotUrls: [],
+    appIcon: 'assets/icons/swiftcel logo.png',
     challenge: 'TODO',
     solution: 'TODO',
     repoUrl: '',

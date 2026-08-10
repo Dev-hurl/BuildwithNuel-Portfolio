@@ -7,6 +7,7 @@ class ProjectModel {
   final String year;
   final List<String> techStack;
   final List<String> screenshotUrls;
+  final String appIcon;
   final String challenge;
   final String solution;
   final String? repoUrl;
@@ -21,6 +22,7 @@ class ProjectModel {
     required this.year,
     required this.techStack,
     required this.screenshotUrls,
+    required this.appIcon,
     required this.challenge,
     required this.solution,
     this.repoUrl,

@@ -14,6 +14,7 @@ class FeaturedProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final hasImage = project.screenshotUrls.isNotEmpty;
+    final hasIcon = project.appIcon.isNotEmpty;
 
     return InkWell(
       onTap: () => context.go('/projects/${project.slug}'),
@@ -46,7 +47,7 @@ class FeaturedProjectCard extends StatelessWidget {
                     child: Container(
                       height: 120,
                       padding: EdgeInsets.symmetric(
-                        horizontal: 16,
+                        horizontal: 24,
                         vertical: 8,
                       ),
                       color: AppColors.background.withValues(alpha: 0.2),
@@ -60,9 +61,9 @@ class FeaturedProjectCard extends StatelessWidget {
                                 child: SizedBox(
                                   width: 40,
                                   height: 40,
-                                  child: hasImage
+                                  child: hasIcon
                                       ? Image.asset(
-                                          project.screenshotUrls.first,
+                                          project.appIcon,
                                           fit: BoxFit.cover,
                                         )
                                       : Container(
