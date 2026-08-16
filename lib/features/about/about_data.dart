@@ -22,25 +22,36 @@ class WorkExperience {
 
 const workExperiences = [
   WorkExperience(
-    company: 'Fiverr',
-    role: 'Flutter Developer & UX/UI Designer',
+    company: 'Freelance',
+    role: 'UX/UI Designer',
     isCurrent: true,
     type: 'Freelance',
-    period: 'January 2022 – Present',
+    period: 'January 2024 – Present',
     location: 'Remote',
     description:
         'Building mobile and web applications for clients across various industries, focusing on Flutter development and user experience design.',
-    techStack: ['Flutter', 'Dart', 'Firebase', 'Supabase', 'Figma'],
+    techStack: [
+      'Figma',
+      'Google Stitch',
+    ],
   ),
   WorkExperience(
-    company: 'Tech Solutions Inc.',
-    role: 'Software Engineer',
-    isCurrent: false,
-    type: 'Full-time',
-    period: 'June 2020 – December 2021',
-    location: 'New York, NY',
+    company: 'Freelance',
+    role: 'Flutter Developer',
+    isCurrent: true,
+    type: 'Freelance',
+    period: 'June 2025 – Present',
+    location: 'Remote',
     description:
-        'Developed and maintained web applications, collaborated with cross-functional teams, and implemented new features based on client requirements.',
-    techStack: ['JavaScript', 'React', 'Node.js', 'SQL'],
+        'Building mobile and web applications for clients across various industries, focusing on Flutter development and user experience design.',
+    techStack: [
+      'Flutter',
+      'Dart',
+      'Firebase',
+      'Supabase',
+      'Provider',
+      'Firestore',
+      '',
+    ],
   ),
 ];

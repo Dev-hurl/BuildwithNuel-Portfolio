@@ -6,7 +6,6 @@ import 'package:buildwithnuel/features/about/profile_card.dart';
 import 'package:buildwithnuel/features/projects/featured_project_card.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_fonts.dart';
 
@@ -34,10 +33,9 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 60),
             EngineeringStackSection(),
             SizedBox(height: 60),
-            _FeaturedProjectsSection(),
-            SizedBox(height: 60,),
             _WorkExperienceSection(),
             SizedBox(height: 60),
+            _FeaturedProjectsSection(),
             _ProjectsSection(),
             SizedBox(height: 60),
           ],
@@ -92,8 +90,7 @@ class _FeaturedProjectsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final featured = projects.take(2).toList();
+    final featured = projects.take(3).toList();
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -102,38 +99,12 @@ class _FeaturedProjectsSection extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Container(width: 4, height: 20, color: AppColors.success),
-                    SizedBox(width: 8),
-                    Text(
-                      'Featured Projects',
-                      style: textTheme.titleMedium?.copyWith(
-                        color: AppColors.textPrimary,
-                        fontFamily: AppFonts.heading,
-                        fontWeight: AppFonts.titleWeight,
-                      ),
-                    ),
-                  ],
-                ),
-                TextButton.icon(
-                  onPressed: () => context.go('/projects'),
-                  icon: Icon(
-                    Icons.arrow_outward,
-                    size: 14,
-                    color: AppColors.success.withValues(alpha: 0.5),
-                  ),
-                  label: Text(
-                    'View All Work',
-                    style: TextStyle(color: AppColors.success.withValues(alpha: 0.5)),
-                  ),
-                ),
-              ],
+            _SectionHeader(
+              eyebrow: 'PROJECTS',
+              title: "Things I've ",
+              highlight: 'built',
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             if (isWide)
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,7 +112,7 @@ class _FeaturedProjectsSection extends StatelessWidget {
                     .map(
                       (p) => Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
                           child: FeaturedProjectCard(project: p),
                         ),
                       ),
@@ -153,7 +124,7 @@ class _FeaturedProjectsSection extends StatelessWidget {
                 children: featured
                     .map(
                       (p) => Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
+                        padding: EdgeInsets.only(bottom: 20),
                         child: FeaturedProjectCard(project: p),
                       ),
                     )
@@ -181,7 +152,7 @@ class _ProjectsSection extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const _SectionHeader(
+            _SectionHeader(
               eyebrow: 'PROJECTS',
               title: "Things I've ",
               highlight: 'built',

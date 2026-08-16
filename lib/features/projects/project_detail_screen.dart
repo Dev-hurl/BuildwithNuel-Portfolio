@@ -1,4 +1,5 @@
 import 'package:buildwithnuel/core/constants/app_colors.dart';
+import 'package:buildwithnuel/core/constants/app_fonts.dart';
 import 'package:buildwithnuel/core/widgets/live_demo_modal.dart';
 import 'package:buildwithnuel/features/projects/models/project_data.dart';
 import 'package:buildwithnuel/features/projects/models/project_model.dart';
@@ -49,30 +50,31 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(project.title, style: textTheme.headlineMedium),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(project.tagline, style: textTheme.titleMedium),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Text('Role: ${project.role}', style: textTheme.labelSmall),
+          SizedBox(height: 12),
           _buildImage(project),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Text(project.description, style: textTheme.bodyMedium),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Text(
             'Tech stack: ${project.techStack.join(', ')}',
-            style: textTheme.labelSmall,
+            style: textTheme.labelLarge?.copyWith(fontFamily: AppFonts.heading),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Text('Challenge', style: textTheme.titleLarge),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(project.challenge, style: textTheme.bodyMedium),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text('Solution', style: textTheme.titleLarge),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Text(project.solution, style: textTheme.bodyMedium),
 
           // ── Demo section, new ──────────────────────────
           if (project.demoUrl != null) ...[
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             Container(
               key: _demoSectionKey,
               child: Column(
@@ -82,7 +84,11 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      LiveDemoModal.show(context, appUrl: project.demoUrl!, title: project.title);
+                      LiveDemoModal.show(
+                        context,
+                        appUrl: project.demoUrl!,
+                        title: project.title,
+                      );
                     },
                     child: Text('Preview', style: textTheme.labelMedium),
                   ),

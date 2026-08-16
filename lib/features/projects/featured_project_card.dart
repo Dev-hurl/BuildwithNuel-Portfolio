@@ -36,14 +36,15 @@ class FeaturedProjectCard extends StatelessWidget {
                     )
                   : Container(color: AppColors.surfaceVariant),
 
-              // Layer 2 
+              // Layer 2
               Positioned(
                 left: 0,
                 right: 0,
                 bottom: 0,
                 child: ClipRRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 4),
+                    enabled: true,
+                    filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                     child: Container(
                       height: 120,
                       padding: EdgeInsets.symmetric(
@@ -55,9 +56,10 @@ class FeaturedProjectCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
+                            spacing: 8,
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.circular(6),
+                                borderRadius: BorderRadius.circular(8),
                                 child: SizedBox(
                                   width: 40,
                                   height: 40,
@@ -68,11 +70,17 @@ class FeaturedProjectCard extends StatelessWidget {
                                         )
                                       : Container(
                                           color: AppColors.surfaceVariant,
-                                          child: Icon(Icons.code),
+                                          child: Icon(Icons.apps),
                                         ),
                                 ),
                               ),
-                              
+                              Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: project.techStack
+                                .map((tech) => _TechTag(label: tech))
+                                .toList(),
+                          ),
                             ],
                           ),
                           Row(
@@ -109,6 +117,7 @@ class FeaturedProjectCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
+                          
                         ],
                       ),
                     ),
@@ -117,6 +126,32 @@ class FeaturedProjectCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _TechTag extends StatelessWidget {
+  final String label;
+  const _TechTag({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceVariant.withValues(alpha: 0.7),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontFamily: AppFonts.body,
+          fontSize: 11,
+          color: AppColors.textSecondary,
+          fontWeight: FontWeight.bold
         ),
       ),
     );

@@ -10,12 +10,12 @@ final List<ProjectModel> projects = [
         'TODO: 2-3 sentences on the problem OrbiTask solves for its user.',
     role: 'Solo Developer & UX/UI Designer',
     year: '2025',
-    techStack: ['Flutter', 'Provider', 'Firebase'],
+    techStack: ['Flutter', 'Provider', 'Firebase' , 'Figma'],
     screenshotUrls: [
       'assets/images/orbitask.jpg',
-      'assets/images/orbitask screenshot.jpg',
+      'assets/images/orbitask_screenshot.png'
     ],
-    appIcon: '',
+    appIcon: 'assets/icons/OrbiTask (Logo only).png',
     challenge:
         'Ensuring users keep track of thier tasks',
     solution:
@@ -30,7 +30,7 @@ final List<ProjectModel> projects = [
     description: 'SwiftCel is a Parcel delivery App',
     role: 'Flutter developer',
     year: '2026',
-    techStack: ['Flutter', 'Firebase', 'Google Stitch' ],
+    techStack: ['Flutter', 'Firebase', 'Google Stitch', 'Provider'],
     screenshotUrls: [''],
     appIcon: 'assets/icons/swiftcel logo.png',
     challenge: '',
