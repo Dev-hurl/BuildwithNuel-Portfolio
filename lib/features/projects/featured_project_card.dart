@@ -36,7 +36,7 @@ class FeaturedProjectCard extends StatelessWidget {
                     )
                   : Container(color: AppColors.surfaceVariant),
 
-              // Layer 2 — fixed-height frosted panel, bottom, full width
+              // Layer 2 
               Positioned(
                 left: 0,
                 right: 0,
@@ -48,7 +48,7 @@ class FeaturedProjectCard extends StatelessWidget {
                       height: 120,
                       padding: EdgeInsets.symmetric(
                         horizontal: 24,
-                        vertical: 8,
+                        vertical: 12,
                       ),
                       color: AppColors.background.withValues(alpha: 0.2),
                       child: Column(
@@ -68,6 +68,7 @@ class FeaturedProjectCard extends StatelessWidget {
                                         )
                                       : Container(
                                           color: AppColors.surfaceVariant,
+                                          child: Icon(Icons.code),
                                         ),
                                 ),
                               ),
