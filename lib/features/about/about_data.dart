@@ -51,7 +51,6 @@ const workExperiences = [
       'Supabase',
       'Provider',
       'Firestore',
-      '',
     ],
   ),
 ];

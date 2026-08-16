@@ -74,13 +74,6 @@ class FeaturedProjectCard extends StatelessWidget {
                                         ),
                                 ),
                               ),
-                              Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: project.techStack
-                                .map((tech) => _TechTag(label: tech))
-                                .toList(),
-                          ),
                             ],
                           ),
                           Row(
@@ -117,7 +110,6 @@ class FeaturedProjectCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          
                         ],
                       ),
                     ),
@@ -126,32 +118,6 @@ class FeaturedProjectCard extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _TechTag extends StatelessWidget {
-  final String label;
-  const _TechTag({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: AppColors.surfaceVariant.withValues(alpha: 0.7),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontFamily: AppFonts.body,
-          fontSize: 11,
-          color: AppColors.textSecondary,
-          fontWeight: FontWeight.bold
         ),
       ),
     );
